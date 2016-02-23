@@ -1,0 +1,18 @@
+	server {
+		listen unix:/var/run/@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
+		server_name	@NGX_DOMAIN@;
+		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN;
+		index index.htm index.html index.php;
+		autoindex off;
+		access_log off;
+
+		location / {
+			try_files $uri/ $uri =404;
+		}
+#ifdef NGX_ENABLE_PHP
+		location ~ \.php$ {
+			include /aura/configuration/system/nginx/standard-php.inc
+			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
+		}
+#endif
+	}

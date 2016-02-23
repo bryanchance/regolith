@@ -1,0 +1,19 @@
+#if NGX_MAINDOMAIN
+	server {
+		listen [@AURA_IPV6@]:80;
+		listen @AURA_IPV4@:80;
+		server_name	www.@NGX_DOMAIN@;
+		return 302 $scheme://@NGX_DOMAIN@$request_uri;
+	}
+#endif
+	server {
+		listen [@AURA_IPV6@]:80;
+		listen @AURA_IPV4@:80;
+		server_name	@NGX_DOMAIN@
+
+		location / {
+			proxy_pass http://unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+		}
+	}
