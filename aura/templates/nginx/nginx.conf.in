@@ -16,7 +16,7 @@ http {
 		'$status $body_bytes_sent "$http_referer" '
 		'"$http_user_agent" "$http_x_forwarded_for"';
 	client_max_body_size 100m;
-	include /aura/configuration/system/nginx/mine-types.inc;
+	include /aura/configuration/system/nginx/mime-types.inc;
 
 #ifdef NGX_GLOBAL
 	server {
