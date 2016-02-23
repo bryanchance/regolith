@@ -1,9 +1,9 @@
 	server {
 		listen unix:/var/run/@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
 		server_name	@NGX_DOMAIN@;
-		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN;
+		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN@;
 		index index.htm index.html index.php;
-		autoindex off;
+		autoindex on;
 		access_log off;
 
 		location / {
