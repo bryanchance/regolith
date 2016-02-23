@@ -10,9 +10,9 @@ add_subdirectory(system)
 add_subdirectory(binoc)
 
 ### These are specific to BinOC
-if(varBuildBinOC)
+if(varTargetServerQuartz)
 	add_subdirectory(staff)
 	add_subdirectory(unaffiliated)
-elseif(varBuildMCP)
+elseif(varTargetServerRegolith)
 	add_subdirectory(mcp)
 endif()
