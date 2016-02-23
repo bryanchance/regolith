@@ -3,12 +3,16 @@
 		server_name	@NGX_DOMAIN@;
 		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN@;
 		index index.htm index.html index.php;
+#ifdef NGNX_ENABLE_AUTOINDEX
 		autoindex on;
+#else
+		autoindex off;
+#endif
 		access_log off;
-
+		location @404 { return 404; }
 		location / {
 #ifdef NGX_ENABLE_CMSMS
-			try_files $uri $uri/ /index.php?page=$request_uri
+			try_files $uri $uri/ /index.php?page=$request_uri =404
 #else
 			try_files $uri/ $uri =404;
 #endif
