@@ -10,3 +10,5 @@ file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/dist/bin)
 set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/dist/bin")
 
 include(${CMAKE_SOURCE_DIR}/config/cmk_modules/py_pp.cmake)
+
+add_subdirectory(aura)
