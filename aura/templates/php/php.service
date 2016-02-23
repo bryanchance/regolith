@@ -1,0 +1,14 @@
+[Unit]
+Description=Aura Platform Service: fcgid
+After=syslog.target network.target
+
+[Service]
+Type=notify
+PIDFile=/var/run/aura-system-php.pid
+ExecStart=/usr/sbin/php-fpm --nodaemonize -c /aura/configuration/system/php --fpm-config  /aura/configuration/system/php/php.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
