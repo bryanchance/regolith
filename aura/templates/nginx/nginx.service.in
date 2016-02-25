@@ -6,8 +6,13 @@ After=network.target remote-fs.target nss-lookup.target
 [Service]
 Type=forking
 PIDFile=/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.pid
+#ifdef NGX_GLOBAL
+ExecStartPre=/usr/sbin/nginx -t -c /aura/configuration/@AURA_USER_CLASS@/nginx/nginx.conf
+ExecStart=/usr/sbin/nginx -c /aura/configuration/@AURA_USER_CLASS@/nginx/nginx.conf
+#elif
 ExecStartPre=/usr/sbin/nginx -t -c /aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/nginx/nginx.conf ; -/bin/rm -f /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket
 ExecStart=/usr/sbin/nginx -c /aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/nginx/nginx.conf
+#endif
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s QUIT $MAINPID
 PrivateTmp=true
