@@ -3,7 +3,7 @@ mk_paths()
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 
 # Userscope Nginx systemd Service
-py_pp(${mk_depth}/aura/templates/nginx/nginx.service.in aura-${varUserClass}-${varUserName}.service -Fsubstitution -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}")
+py_pp(${mk_depth}/aura/templates/nginx/nginx.service.in aura-${varUserClass}-${varUserName}-nginx.service -Fsubstitution -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}")
 
 # Userscope Nginx Server Instance
 py_pp(${mk_depth}/aura/templates/nginx/nginx.conf.in nginx.conf -Fsubstitution -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}")
