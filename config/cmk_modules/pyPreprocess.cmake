@@ -11,8 +11,8 @@
 ### mk_relpath is named path between the current source/obj directory from top src/obj eg. app/base/content
 
 
-# Current usage: py_pp(nginx.conf.in nginx.conf -Fsubstitution -DNGX_USER="root")
-function(py_pp varInputFile varOutputFile)
+# Current usage: pyPreprocess(nginx.conf.in nginx.conf -Fsubstitution -DNGX_USER="root")
+function(pyPreprocess varInputFile varOutputFile)
   # Remove the semicolon separator from the list of arguments we haven't directly said exist..
   # Namely the ones (primarily defines) we want to pass to the preprocessor
   string (REPLACE ";" " " varDefines "${ARGN}")
@@ -40,4 +40,4 @@ function(py_pp varInputFile varOutputFile)
     DEPENDS ${mk_objdir}/${varOutputFile}.pp ${CMAKE_INSTALL_PREFIX}/${mk_relpath}/${varOutputFile}
   )
   
-endfunction(py_pp)
+endfunction(pyPreprocess)
