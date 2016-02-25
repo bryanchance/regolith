@@ -7,7 +7,7 @@
 		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN@;
 #endif
 		index index.htm index.html index.php;
-#ifdef NGNX_ENABLE_AUTOINDEX
+#ifdef NGX_ENABLE_AUTOINDEX
 		autoindex on;
 #else
 		autoindex off;
