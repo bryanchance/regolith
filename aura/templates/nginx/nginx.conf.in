@@ -26,7 +26,7 @@ http {
 		server_name_in_redirect off;
 		add_header X-BinOC configured=false always;
 		add_header X-BinOC platform=aura always;
-		add_header X-BinOC level=4.0 always;
+		add_header X-BinOC level=@AURA_VERSION@ always;
 		return 406;
 	}
 
@@ -36,5 +36,5 @@ http {
 	add_header X-BinOC socket=true always;
 #endif
 	add_header X-BinOC platform=aura always;
-	add_header X-BinOC level=4.0 always;
+	add_header X-BinOC level=@AURA_VERSION@ always;
 }
