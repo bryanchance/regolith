@@ -16,7 +16,7 @@ py_pp(${mk_depth}/aura/templates/nginx/standard.proxy.in www.${varDomain}.proxy 
 set(varSubdomain "www")
 set(varRootDomain "mattatobin.com")
 set(varDomain ${varRootDomain})
-py_pp(${mk_depth}/aura/templates/nginx/standard.vhost.in ${varDomain}.vhost -Fsubstitution -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ROOTDOMAIN="${varRootDomain}" -DNGX_SUBDOMAIN="${varSubdomain}" -DNGX_ENABLE_PHP=1 -DNGX_ENABLE_CMSMS=1)
+py_pp(${mk_depth}/aura/templates/nginx/standard.vhost.in www.${varDomain}.vhost -Fsubstitution -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ROOTDOMAIN="${varRootDomain}" -DNGX_SUBDOMAIN="${varSubdomain}" -DNGX_ENABLE_PHP=1 -DNGX_ENABLE_CMSMS=1)
 
 # Proxy file for personal.mattatobin.com
 set(varDomain "personal.mattatobin.com")
