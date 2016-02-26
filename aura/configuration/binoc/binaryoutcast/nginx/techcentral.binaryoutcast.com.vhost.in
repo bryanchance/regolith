@@ -1,0 +1,30 @@
+	server {
+		listen unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
+		server_name	@NGX_DOMAIN@;
+		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN@;
+		index index.htm index.html index.php;
+		autoindex off;
+		access_log off;
+		location @404 { return 404; }
+		location ~* /wp-login.php {
+			auth_basic "Binary Outcast Security Protocol Alpha One Nine Two Five";
+			auth_basic_user_file /aura/accounts/binoc/binaryoutcast/config/nginx/user/basic.passwd;
+			try_files $uri =404;
+			include /aura/configuration/system/nginx/standard-php.inc;
+			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
+		}
+		rewrite ^([^.]*[^/])$ $1/ redirect;
+		location / {
+			try_files $uri $uri/ /index.php?page=$request_uri =404;
+		}
+		location ~ \.php$ {
+			include /aura/configuration/system/nginx/standard-php.inc;
+			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
+		}
+		location ~* /techcentral/(.*) {
+			return 302 http://techcentral.binaryoutcast.com/$1;
+		}
+		location /software/projects/pm4xp {
+			return 302 http://binaryoutcast.com/projects/pm4xp/;
+		}
+	}
