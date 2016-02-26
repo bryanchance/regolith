@@ -2,13 +2,14 @@ mk_paths()
 
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 
-# Set nameservers
+# Set vars
 set(varBindNS1 "ns1.binocnetwork.com")
 set(varBindNS2 "ns2.binocnetwork.com")
+set(varBindConfPrefix "aura/configuration/system/bind")
 
 # Preprocess Main BIND Files
-pyPreprocess(named.conf.in named.conf)
-pyPreprocess(named.inc.in named.inc)
+pyPreprocess(named.conf.in named.conf -Fsubstitution -DBIND_CONF_PREFIX="${varBindConfPrefix}")
+pyPreprocess(named.inc.in named.inc -Fsubstitution -DBIND_CONF_PREFIX="${varBindConfPrefix}")
 
 # Preprocess zones for class: binoc
 set(varBindDomain "binocnetwork.com")

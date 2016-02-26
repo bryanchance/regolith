@@ -58,6 +58,6 @@
 
 include "/etc/named.rfc1912.zones";
 include "/etc/named.root.key";
-include "/aura/configuration/system/bind/named.inc";
+include "/@BIND_CONF_PREFIX@/named.inc";
 
 /* ============================================================== */
