@@ -1,0 +1,34 @@
+$ORIGIN @BIND_DOMAIN@.
+$TTL 3600
+; Server of Authority Record
+@					IN	SOA	@BIND_NS1@. tobin.binaryoutcast.com. (
+					1338055820
+					10800
+					3600
+					604800
+					38400 )
+
+; Domain IPv6 Records
+					IN	AAAA	@AURA_IPV6@
+					
+; Domain IPv4 Records	
+					IN	A		@AURA_IPV4@
+
+; Domain MX Records
+
+; Domain NS Records
+					IN	NS		@BIND_NS1@.
+					IN	NS		@BIND_NS2@.
+
+; Sub-domain IPv6 Records
+ns2					IN	AAAA	@AURA_IPV6@
+quartz.server		IN	AAAA	@AURA_IPV6@
+regolith.server		IN	AAAA	2607:ff48:1:302::53cf:d149 ; Regolith IPv4
+
+; Sub-domain IPv4 Records
+ns1					IN	A		@AURA_IPV4@
+quartz.server		IN	A		@AURA_IPV4@
+regolith.server		IN	A		173.44.61.210 ; Regolith IPv4
+
+; Sub-domain CNAME Records
+www					IN	CNAME	@BIND_DOMAIN@.

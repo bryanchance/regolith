@@ -1,0 +1,9 @@
+zone "binocglobal.com" {
+	type master;
+	file	"/aura/accounts/binoc/binaryoutcast/config/bind/binocglobal.com.zone";
+};
+
+zone "binaryoutcast.com" {
+	type master;
+	file	"/aura/accounts/binoc/binaryoutcast/config/bind/binaryoutcast.com.zone";
+};
