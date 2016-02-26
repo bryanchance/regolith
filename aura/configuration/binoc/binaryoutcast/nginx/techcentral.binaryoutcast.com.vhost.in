@@ -8,7 +8,7 @@
 		location @404 { return 404; }
 		location ~* /wp-login.php {
 			auth_basic "Binary Outcast Security Protocol Alpha One Nine Two Five";
-			auth_basic_user_file /aura/accounts/binoc/binaryoutcast/config/nginx/user/basic.passwd;
+			auth_basic_user_file /aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/nginx/user/wpadmin.passwd;
 			try_files $uri =404;
 			include /aura/configuration/system/nginx/standard-php.inc;
 			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
