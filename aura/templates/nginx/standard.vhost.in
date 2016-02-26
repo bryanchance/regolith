@@ -1,8 +1,8 @@
 	server {
 		listen unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
 		server_name	@NGX_DOMAIN@;
-#ifdef NGX_SERVEROPS
-		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/operations;
+#ifdef NGX_OVERRIDE_SUBDOMAIN
+		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_OVERRIDE_SUBDOMAIN@;
 #else
 		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN@;
 #endif
