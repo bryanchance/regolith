@@ -13,7 +13,7 @@ set(varDomain "valik.staff.binocnetwork.com")
 pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.proxy -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}")
 
 # VHOST for Sever Subdomain
-set(varSubdomain "valik.server")
+set(varSubdomain "valik.staff")
 set(varRootDomain "binocnetwork.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
 pyPreprocess(${mk_depth}/aura/templates/nginx/standard.vhost.in ${varDomain}.vhost -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ROOTDOMAIN="${varRootDomain}" -DNGX_SUBDOMAIN="${varSubdomain}" -DNGX_OVERRIDE_SUBDOMAIN="valik" -DNGX_ENABLE_PHP=1)
