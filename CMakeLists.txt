@@ -1,7 +1,7 @@
 # CMake Basics
 project (aura)
 cmake_minimum_required(VERSION 3.4)
-set(CMAKE_VERBOSE_MAKEFILE "1")
+set(CMAKE_VERBOSE_MAKEFILE "0")
 
 include(${CMAKE_SOURCE_DIR}/config/cmk_modules/mk_path.cmake)
 mk_paths()
