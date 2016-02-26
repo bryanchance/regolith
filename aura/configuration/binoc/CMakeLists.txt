@@ -10,7 +10,6 @@ add_subdirectory(binocnetwork)
 
 if(varTargetServerQuartz)
 add_subdirectory(binaryoutcast)
-add_subdirectory(binocglobal)
 add_subdirectory(newtobinparadigm)
 add_subdirectory(royalgeekworld)
 endif()
