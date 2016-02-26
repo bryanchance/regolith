@@ -17,7 +17,7 @@ include=/aura/configuration/*/*/php/php-pool.conf
 [global]
 ; Pid file
 ; Default Value: none
-pid = /var/run/aura-system-php.pid
+pid = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@php.pid
 
 ; Error log file
 ; Default Value: /var/log/php-fpm.log
