@@ -9,7 +9,7 @@
 	server {
 		listen [@AURA_IPV6@]:80;
 		listen @AURA_IPV4@:80;
-		server_name	@NGX_DOMAIN@
+		server_name	@NGX_DOMAIN@;
 
 		location / {
 			proxy_pass http://unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
