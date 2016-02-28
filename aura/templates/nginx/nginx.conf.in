@@ -33,7 +33,6 @@ http {
 	include	/aura/configuration/*/*/nginx/*.proxy;
 #else
 	include	/aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/nginx/*.vhost;
-	add_header X-BinOC configured=true always;
 	add_header X-BinOC socket=true always;
 #endif
 	add_header X-BinOC platform=aura always;

@@ -18,6 +18,4 @@
 			proxy_set_header X-Real-IP $remote_addr;
 		}
 		add_header X-BinOC configured=true always;
-		add_header X-BinOC platform=aura always;
-		add_header X-BinOC level=@AURA_VERSION@ always;
 	}
