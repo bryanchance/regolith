@@ -18,7 +18,7 @@
 #ifdef NGX_ENABLE_CMSMS
 			try_files $uri $uri/ /index.php?page=$request_uri;
 #else
-			try_files $uri/ $uri;
+			try_files $uri/ $uri =404;
 #endif
 		}
 #ifdef NGX_ENABLE_PHP
