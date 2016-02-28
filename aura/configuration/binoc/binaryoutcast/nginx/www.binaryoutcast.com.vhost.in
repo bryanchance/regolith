@@ -19,4 +19,5 @@
 		location /software/projects/pm4xp {
 			return 302 http://binaryoutcast.com/projects/pm4xp/;
 		}
+		add_header X-BinOC socket=true always;
 	}

@@ -27,4 +27,5 @@
 			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
 		}
 #endif
+		add_header X-BinOC socket=true always;
 	}

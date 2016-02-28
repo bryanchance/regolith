@@ -3,6 +3,9 @@
 		listen [@AURA_IPV6@]:80;
 		listen @AURA_IPV4@:80;
 		server_name	www.@NGX_DOMAIN@;
+		add_header X-BinOC configured=true always;
+		add_header X-BinOC platform=aura always;
+		add_header X-BinOC level=@AURA_VERSION@ always;
 		return 302 $scheme://@NGX_DOMAIN@$request_uri;
 	}
 #endif
@@ -16,4 +19,7 @@
 			proxy_set_header Host $host;
 			proxy_set_header X-Real-IP $remote_addr;
 		}
+		add_header X-BinOC configured=true always;
+		add_header X-BinOC platform=aura always;
+		add_header X-BinOC level=@AURA_VERSION@ always;
 	}

@@ -17,7 +17,6 @@ http {
 		'"$http_user_agent" "$http_x_forwarded_for"';
 	client_max_body_size 100m;
 	include /aura/configuration/system/nginx/mime-types.inc;
-
 #ifdef NGX_GLOBAL
 	server {
 		listen 80 default_server;
@@ -33,8 +32,5 @@ http {
 	include	/aura/configuration/*/*/nginx/*.proxy;
 #else
 	include	/aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/nginx/*.vhost;
-	add_header X-BinOC socket=true always;
 #endif
-	add_header X-BinOC platform=aura always;
-	add_header X-BinOC level=@AURA_VERSION@ always;
 }
