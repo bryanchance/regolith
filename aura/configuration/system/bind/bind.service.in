@@ -1,0 +1,25 @@
+[Unit]
+Description=Aura Platform Service: BIND
+Wants=nss-lookup.target
+Wants=named-setup-rndc.service
+Before=nss-lookup.target
+After=network.target
+After=named-setup-rndc.service
+
+[Service]
+Type=forking
+EnvironmentFile=-/etc/sysconfig/named
+Environment=KRB5_KTNAME=/etc/named.keytab
+PIDFile=/run/named/named.pid
+
+ExecStartPre=/bin/bash -c 'if [ ! "$DISABLE_ZONE_CHECKING" == "yes" ]; then /usr/sbin/named-checkconf -z /@BIND_CONF_PREFIX@/named.conf; else echo "Checking of zone files is disabled"; fi'
+ExecStart=/usr/sbin/named -u named -c /@BIND_CONF_PREFIX@/named.conf $OPTIONS
+
+ExecReload=/bin/sh -c '/usr/sbin/rndc reload > /dev/null 2>&1 || /bin/kill -HUP $MAINPID'
+
+ExecStop=/bin/sh -c '/usr/sbin/rndc stop > /dev/null 2>&1 || /bin/kill -TERM $MAINPID'
+
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
