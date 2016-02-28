@@ -14,7 +14,7 @@
 		}
 		rewrite ^([^.]*[^/])$ $1/ redirect;
 		location / {
-			try_files $uri $uri/ /index.php?page=$request_uri =404;
+			try_files $uri $uri/ /index.php?page=$request_uri;
 		}
 		location ~ \.php$ {
 			include /aura/configuration/system/nginx/standard-php.inc;

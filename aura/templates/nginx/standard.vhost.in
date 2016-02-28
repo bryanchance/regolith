@@ -16,9 +16,9 @@
 		location @404 { return 404; }
 		location / {
 #ifdef NGX_ENABLE_CMSMS
-			try_files $uri $uri/ /index.php?page=$request_uri =404;
+			try_files $uri $uri/ /index.php?page=$request_uri;
 #else
-			try_files $uri/ $uri =404;
+			try_files $uri/ $uri;
 #endif
 		}
 #ifdef NGX_ENABLE_PHP
