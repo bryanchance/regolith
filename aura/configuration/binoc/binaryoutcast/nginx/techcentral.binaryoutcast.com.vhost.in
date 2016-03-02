@@ -6,12 +6,6 @@
 		autoindex off;
 		access_log off;
 		location @404 { return 404; }
-		location ~* /wp-login.php {
-			auth_basic "Binary Outcast Security Protocol Alpha One Nine Two Five";
-			auth_basic_user_file /aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/nginx/user/wpadmin.passwd;
-			include /aura/configuration/system/nginx/standard-php.inc;
-			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
-		}
 		rewrite ^([^.]*[^/])$ $1/ redirect;
 		location / {
 			try_files $uri $uri/ /index.php?page=$request_uri;
