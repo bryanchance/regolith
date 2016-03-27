@@ -7,6 +7,3 @@ set(varUserClass "mcp")
 
 # Add subdirectories
 add_subdirectory(palemoon)
-
-# add_subdirectory(fossamail)
-# add_subdirectory(productions)
