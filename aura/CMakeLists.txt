@@ -3,7 +3,7 @@ mk_paths()
 # Set variables about the build
 
 ### Set some nifty vars
-set(varTargetAuraVersion "4.0b2")
+set(varTargetAuraVersion "4.0b3")
 
 ### Which configuration do we build?
 set(varTargetServerQuartz 1)
