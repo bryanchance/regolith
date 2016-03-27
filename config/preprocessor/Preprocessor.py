@@ -475,7 +475,6 @@ class Preprocessor:
 def main():
   pp = Preprocessor()
   pp.handleCommandLine(None, True)
-  sys.stderr.write('[Preprocessor] Processing file...\n')
   return
 
 def preprocess(includes=[sys.stdin], defines={},
