@@ -28,9 +28,6 @@ set(varRootDomain "binaryoutcast.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
 pyPreprocess(${varDomain}.vhost.in ${varDomain}.vhost -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ROOTDOMAIN="${varRootDomain}" -DNGX_SUBDOMAIN="${varSubdomain}")
 
-# Copy file for techcentral.binaryoutcast.com's wp-admin basic auth
-pyPreprocess(wpadmin.passwd wpadmin.passwd)
-
 # Proxy file for repository.binaryoutcast.com
 set(varDomain "repository.binaryoutcast.com")
 pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.proxy -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}")
