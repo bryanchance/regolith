@@ -5,9 +5,25 @@ mk_paths()
 ### Set some nifty vars
 set(varTargetAuraVersion "4.0b3")
 
-### Which configuration do we build?
-set(varTargetServerQuartz 1)
-set(varTargetServerRegolith)
+### If the build script has a blank variable that is passed as a define then target "Quartz" 
+if (NOT CMK_SERVER_TARGET)
+set (CMK_SERVER_TARGET "quartz")
+endif ()
+
+### If the build script variable is not blank then evaluate it
+if (CMK_SERVER_TARGET)
+	if(CMK_SERVER_TARGET MATCHES "quartz")
+		set(varTargetServerQuartz 1)
+		set(varTargetServerRegolith)
+	elseif(CMK_SERVER_TARGET MATCHES "regolith")
+		set(varTargetServerQuartz)
+		set(varTargetServerRegolith 1)
+	else()
+    message( FATAL_ERROR "You did not specify a valid target server." )
+	endif()
+else()
+  message( FATAL_ERROR "You did not specify a target server." )
+endif()
 
 ### Server Specific Info
 if(varTargetServerQuartz)

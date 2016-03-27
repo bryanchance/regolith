@@ -24,6 +24,6 @@ fi
 
 mkdir obj-dir
 cd obj-dir
-"$BINOC_CMAKE_PATH" ../ -G "Unix Makefiles"
+"$BINOC_CMAKE_PATH" ../ -G "Unix Makefiles" -DCMK_SERVER_TARGET="$1"
 "$BINOC_CMAKE_PATH" --build ./
 cd ..
