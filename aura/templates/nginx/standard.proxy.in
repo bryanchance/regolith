@@ -2,6 +2,15 @@
 	server {
 		listen [@AURA_IPV6@]:80;
 		listen @AURA_IPV4@:80;
+#if NGX_ENABLE_SSL
+		listen [@AURA_IPV6@]:443 ssl;
+		listen @AURA_IPV4@:443 ssl;
+		ssl_certificate /aura/system/nginx/certs/@NGX_SSL_CERT@.crt;
+		ssl_certificate_key /aura/system/nginx/certs/@NGX_SSL_CERT@.dec.key;
+		ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+		ssl_ciphers !aNULL:!LOW:!MD5:!EXP:CAMELLIA:AES256:HIGH:AES128:!RC4:!3DES:!SEED;
+		ssl_prefer_server_ciphers on;
+#endif
 		server_name	www.@NGX_DOMAIN@;
 		add_header X-BinOC configured=true always;
 		add_header X-BinOC platform=aura always;
@@ -12,12 +21,22 @@
 	server {
 		listen [@AURA_IPV6@]:80;
 		listen @AURA_IPV4@:80;
+#if NGX_ENABLE_SSL
+		listen [@AURA_IPV6@]:443 ssl;
+		listen @AURA_IPV4@:443 ssl;
+		ssl_certificate /aura/system/nginx/certs/@NGX_SSL_CERT@.crt;
+		ssl_certificate_key /aura/system/nginx/certs/@NGX_SSL_CERT@.dec.key;
+		ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+		ssl_ciphers !aNULL:!LOW:!MD5:!EXP:CAMELLIA:AES256:HIGH:AES128:!RC4:!3DES:!SEED;
+		ssl_prefer_server_ciphers on;
+#endif
 		server_name	@NGX_DOMAIN@;
 
 		location / {
 			proxy_pass http://unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
 			proxy_set_header Host $host;
 			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Real-Scheme $scheme;
 		}
 		add_header X-BinOC configured=true always;
 		add_header X-BinOC platform=aura always;
