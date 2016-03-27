@@ -24,7 +24,13 @@
 #ifdef NGX_ENABLE_PHP
 		location ~ \.php$ {
 			include /aura/configuration/system/nginx/standard-php.inc;
+#ifdef PHP_VERSION_56
+			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
+#elif PHP_VERSION_70
+			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php70.socket;
+#else
 			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
+#endif
 		}
 #endif
 		add_header X-BinOC socket=true always;

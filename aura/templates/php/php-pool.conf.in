@@ -1,8 +1,16 @@
 [@AURA_USER_NAME@]
 
+#ifdef PHP_VERSION_56
+listen = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket
+#elif PHP_VERSION_70
+listen = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php70.socket
+#else
 listen = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket
+#endif
+
 user = @AURA_USER_NAME@
 group = @AURA_USER_NAME@
+listen.mode = 0666
 
 pm = dynamic
 #ifdef PHP_ENABLE_LARGE_POOL
@@ -23,7 +31,7 @@ pm.max_requests = 200
 php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f www@my.domain.com
 #endif
 php_flag[display_errors] = on
-php_admin_value[error_log] = /var/log/php-fpm/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@.log
+php_admin_value[error_log] = /var/log/php-fpm/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.log
 php_admin_flag[log_errors] = off
 php_admin_value[memory_limit] = 128M
 

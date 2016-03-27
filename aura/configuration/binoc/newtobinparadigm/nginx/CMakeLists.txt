@@ -16,7 +16,7 @@ pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in www.${varDomain}
 set(varSubdomain "www")
 set(varRootDomain "mattatobin.com")
 set(varDomain ${varRootDomain})
-pyPreprocess(${mk_depth}/aura/templates/nginx/standard.vhost.in www.${varDomain}.vhost -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ROOTDOMAIN="${varRootDomain}" -DNGX_SUBDOMAIN="${varSubdomain}" -DNGX_ENABLE_PHP=1 -DNGX_ENABLE_CMSMS=1)
+pyPreprocess(${mk_depth}/aura/templates/nginx/standard.vhost.in www.${varDomain}.vhost -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ROOTDOMAIN="${varRootDomain}" -DNGX_SUBDOMAIN="${varSubdomain}" -DNGX_ENABLE_PHP=1 -DNGX_ENABLE_CMSMS=1 -DPHP_VERSION_56=1)
 
 # Proxy file for personal.mattatobin.com
 set(varDomain "personal.mattatobin.com")
@@ -26,4 +26,4 @@ pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.pro
 set(varSubdomain "personal")
 set(varRootDomain "mattatobin.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(${mk_depth}/aura/templates/nginx/standard.vhost.in ${varDomain}.vhost -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ROOTDOMAIN="${varRootDomain}" -DNGX_SUBDOMAIN="${varSubdomain}" -DNGX_ENABLE_PHP=1)
+pyPreprocess(${mk_depth}/aura/templates/nginx/standard.vhost.in ${varDomain}.vhost -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ROOTDOMAIN="${varRootDomain}" -DNGX_SUBDOMAIN="${varSubdomain}" -DNGX_ENABLE_PHP=1 -DPHP_VERSION_56=1)

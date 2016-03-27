@@ -12,13 +12,7 @@
 		}
 		location ~ \.php$ {
 			include /aura/configuration/system/nginx/standard-php.inc;
-			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
-		}
-		location ~* /techcentral/(.*) {
-			return 302 http://techcentral.binaryoutcast.com/$1;
-		}
-		location /software/projects/pm4xp {
-			return 302 http://binaryoutcast.com/projects/pm4xp/;
+			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php70.socket;
 		}
 		add_header X-BinOC socket=true always;
 	}

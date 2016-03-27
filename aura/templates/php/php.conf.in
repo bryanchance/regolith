@@ -8,7 +8,13 @@
 ; Include one or more files. If glob(3) exists, it is used to include a bunch of
 ; files from a glob(3) pattern. This directive can be used everywhere in the
 ; file.
+#ifdef PHP_VERSION_56
+include=/aura/configuration/*/*/php/php56-pool.conf
+#elif PHP_VERSION_70
+include=/aura/configuration/*/*/php/php70-pool.conf
+#else
 include=/aura/configuration/*/*/php/php-pool.conf
+#endif
 
 ;;;;;;;;;;;;;;;;;;
 ; Global Options ;
@@ -17,11 +23,24 @@ include=/aura/configuration/*/*/php/php-pool.conf
 [global]
 ; Pid file
 ; Default Value: none
-pid = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@php.pid
+#ifdef PHP_VERSION_56
+pid = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.pid
+#elif PHP_VERSION_70
+pid = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php70.pid
+#else
+pid = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.pid
+#endif
 
 ; Error log file
 ; Default Value: /var/log/php-fpm.log
+#ifdef PHP_VERSION_56
+error_log = /var/log/php-fpm/error56.log
+#elif PHP_VERSION_70
+error_log = /var/log/php-fpm/error70.log
+#else
 error_log = /var/log/php-fpm/error.log
+#endif
+
 
 ; Log level
 ; Possible Values: alert, error, warning, notice, debug

@@ -6,12 +6,13 @@
 		autoindex off;
 		access_log off;
 		location @404 { return 404; }
+		rewrite ^([^.]*[^/])$ $1/ redirect;
 		location / {
 			try_files $uri $uri/ /index.php?page=$request_uri;
 		}
 		location ~ \.php$ {
 			include /aura/configuration/system/nginx/standard-php.inc;
-			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
+			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
 		}
 		location ~* /techcentral/(.*) {
 			return 302 http://techcentral.binaryoutcast.com/$1;
