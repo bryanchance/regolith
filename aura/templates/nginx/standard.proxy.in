@@ -1,8 +1,8 @@
-#if NGX_MAINDOMAIN
+#ifdef NGX_MAINDOMAIN
 	server {
 		listen [@AURA_IPV6@]:80;
 		listen @AURA_IPV4@:80;
-#if NGX_ENABLE_SSL
+#ifdef NGX_ENABLE_SSL
 		listen [@AURA_IPV6@]:443 ssl;
 		listen @AURA_IPV4@:443 ssl;
 		ssl_certificate /aura/system/nginx/certs/@NGX_SSL_CERT@.crt;
@@ -21,7 +21,7 @@
 	server {
 		listen [@AURA_IPV6@]:80;
 		listen @AURA_IPV4@:80;
-#if NGX_ENABLE_SSL
+#ifdef NGX_ENABLE_SSL
 		listen [@AURA_IPV6@]:443 ssl;
 		listen @AURA_IPV4@:443 ssl;
 		ssl_certificate /aura/system/nginx/certs/@NGX_SSL_CERT@.crt;
