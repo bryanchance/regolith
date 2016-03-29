@@ -1,0 +1,3 @@
+auth	required pam_userdb.so db=/aura/accounts/mcp/palemoon/.vsftpd/vsftpd 
+account required pam_userdb.so db=/aura/accounts/mcp/palemoon/.vsftpd/vsftpd
+session required pam_loginuid.so

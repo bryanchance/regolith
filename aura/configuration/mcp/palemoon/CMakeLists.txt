@@ -7,3 +7,4 @@ set(varUserName "palemoon")
 
 add_subdirectory(nginx)
 add_subdirectory(php)
+add_subdirectory(vsftpd)
