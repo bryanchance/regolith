@@ -75,4 +75,5 @@
 			include /aura/configuration/system/nginx/standard-php.inc;
 			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
 		}
+		add_header X-BinOC socket=true always;
 	}
