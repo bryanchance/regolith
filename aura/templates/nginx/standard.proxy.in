@@ -5,8 +5,8 @@
 #ifdef NGX_ENABLE_SSL
 		listen [@AURA_IPV6@]:443 ssl;
 		listen @AURA_IPV4@:443 ssl;
-		ssl_certificate /aura/system/nginx/certs/@NGX_SSL_CERT@.crt;
-		ssl_certificate_key /aura/system/nginx/certs/@NGX_SSL_CERT@.dec.key;
+		ssl_certificate /aura/secure/certs/nginx/@NGX_SSL_CERT@.crt;
+		ssl_certificate_key /aura/secure/certs/nginx/@NGX_SSL_CERT@.dec.key;
 		ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 		ssl_ciphers !aNULL:!LOW:!MD5:!EXP:CAMELLIA:AES256:HIGH:AES128:!RC4:!3DES:!SEED;
 		ssl_prefer_server_ciphers on;
@@ -24,8 +24,8 @@
 #ifdef NGX_ENABLE_SSL
 		listen [@AURA_IPV6@]:443 ssl;
 		listen @AURA_IPV4@:443 ssl;
-		ssl_certificate /aura/system/nginx/certs/@NGX_SSL_CERT@.crt;
-		ssl_certificate_key /aura/system/nginx/certs/@NGX_SSL_CERT@.dec.key;
+		ssl_certificate /aura/secure/certs/nginx/@NGX_SSL_CERT@.crt;
+		ssl_certificate_key /aura/secure/certs/nginx/@NGX_SSL_CERT@.dec.key;
 		ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 		ssl_ciphers !aNULL:!LOW:!MD5:!EXP:CAMELLIA:AES256:HIGH:AES128:!RC4:!3DES:!SEED;
 		ssl_prefer_server_ciphers on;
