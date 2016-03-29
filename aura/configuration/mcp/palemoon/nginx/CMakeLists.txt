@@ -10,7 +10,7 @@ pyPreprocess(${mk_depth}/aura/templates/nginx/nginx.conf.in nginx.conf -Fsubstit
 
 # Proxy file for addons.palemoon.org
 set(varDomain "addons.palemoon.org")
-pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.proxy -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ENABLE_SSL=1 -DNGX_SSL_CERT="apmo")
+pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.proxy -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ENABLE_SSL=1 -DNGX_SSL_CERT="${varDomain}")
 
 # VHOST for addons.palemoon.org
 set(varSubdomain "addons")
@@ -20,7 +20,7 @@ pyPreprocess(${varDomain}.vhost.in ${varDomain}.vhost -Fsubstitution -DAURA_VERS
 
 # Proxy file for dev.addons.palemoon.org
 set(varDomain "dev.addons.palemoon.org")
-pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.proxy -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}")
+pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.proxy -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ENABLE_SSL=1 -DNGX_SSL_CERT="addons.palemoon.org")
 
 # VHOST for dev.addons.palemoon.org
 set(varSubdomain "dev.addons")
@@ -30,7 +30,7 @@ pyPreprocess(${mk_depth}/aura/templates/nginx/standard.vhost.in ${varDomain}.vho
 
 # Proxy file for developer.palemoon.org
 set(varDomain "developer.palemoon.org")
-pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.proxy -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}")
+pyPreprocess(${mk_depth}/aura/templates/nginx/standard.proxy.in ${varDomain}.proxy -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}" -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DNGX_DOMAIN="${varDomain}" -DNGX_ENABLE_SSL=1 -DNGX_SSL_CERT="${varDomain}")
 
 # VHOST for developer.palemoon.org
 set(varSubdomain "developer")
