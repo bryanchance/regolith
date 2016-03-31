@@ -1,37 +1,39 @@
-	server {
-		listen unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
-		server_name	@NGX_DOMAIN@;
+    server {
+        listen unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
+        server_name    @NGX_DOMAIN@;
 #ifdef NGX_OVERRIDE_SUBDOMAIN
-		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_OVERRIDE_SUBDOMAIN@;
+        root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_OVERRIDE_SUBDOMAIN@;
 #else
-		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN@;
+        root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN@;
 #endif
-		index index.htm index.html index.php;
+        index index.htm index.html index.php;
 #ifdef NGX_ENABLE_AUTOINDEX
-		autoindex on;
+        autoindex on;
 #else
-		autoindex off;
+        autoindex off;
 #endif
-		access_log off;
-		location @404 { return 404; }
-		location / {
+        access_log off;
+        location @404 { return 404; }
+        location / {
 #ifdef NGX_ENABLE_CMSMS
-			try_files $uri $uri/ /index.php?page=$request_uri;
+            try_files $uri $uri/ /index.php?page=$request_uri;
+#elif NGX_ENABLE_ENANO
+            try_files $uri $uri/ /index.php?title=$request_uri;
 #else
-			try_files $uri/ $uri =404;
+            try_files $uri/ $uri =404;
 #endif
-		}
+        }
 #ifdef NGX_ENABLE_PHP
-		location ~ \.php$ {
-			include /aura/configuration/system/nginx/standard-php.inc;
+        location ~ \.php$ {
+            include /aura/configuration/system/nginx/standard-php.inc;
 #ifdef PHP_VERSION_56
-			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
+            fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
 #elif PHP_VERSION_70
-			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php70.socket;
+            fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php70.socket;
 #else
-			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
+            fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket;
 #endif
-		}
+        }
 #endif
-		add_header X-BinOC socket=true always;
-	}
+        add_header X-BinOC socket=true always;
+    }
