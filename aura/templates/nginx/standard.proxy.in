@@ -38,11 +38,16 @@
             proxy_set_header Host $host;
             proxy_set_header HTTPS $https;
 
+#ifdef NGX_ENABLE_CLOUDFLARE
+            proxy_set_header X-Real-IP $http_cf_connecting_ip;
+            proxy_set_header X-Forwarded-For $http_cf_connecting_ip;
+#else
             proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Real-Scheme $scheme;
-
-            proxy_set_header X-Forwarded-Host $host;
             proxy_set_header X-Forwarded-For $remote_addr;
+#endif
+
+            proxy_set_header X-Real-Scheme $scheme;
+            proxy_set_header X-Forwarded-Host $host;
         }
         add_header X-BinOC configured=true always;
         add_header X-BinOC platform=aura always;

@@ -38,6 +38,7 @@ pyPreprocess(
     -DNGX_DOMAIN="${varDomain}"
     -DNGX_ENABLE_SSL=1
     -DNGX_SSL_CERT="${varDomain}"
+    -DNGX_ENABLE_CLOUDFLARE=1
 )
 
 # VHOST for addons.palemoon.org
