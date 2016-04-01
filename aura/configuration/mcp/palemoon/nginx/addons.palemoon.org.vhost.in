@@ -73,6 +73,8 @@
 		# Send all php files to php-fpm
 		location ~ \.php$ {
 			include /aura/configuration/system/nginx/standard-php.inc;
+            fastcgi_intercept_errors on;
+            error_page 404 = @404;
 			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
 		}
 		add_header X-BinOC socket=true always;

@@ -18,14 +18,19 @@
 #ifdef NGX_ENABLE_CMSMS
             try_files $uri $uri/ /index.php?page=$request_uri;
 #elif NGX_ENABLE_ENANO
-            try_files $uri $uri/ /index.php?title=$request_uri;
+            try_files $uri $uri/ =404;
 #else
             try_files $uri/ $uri =404;
 #endif
         }
+
 #ifdef NGX_ENABLE_PHP
         location ~ \.php$ {
             include /aura/configuration/system/nginx/standard-php.inc;
+#ifndef NGX_ENABLE_PHP_404
+            fastcgi_intercept_errors on;
+            error_page 404 = @404;
+#endif
 #ifdef PHP_VERSION_56
             fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
 #elif PHP_VERSION_70

@@ -20,5 +20,3 @@
             fastcgi_param  REDIRECT_STATUS    200;
             fastcgi_index index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            fastcgi_intercept_errors on;
-            error_page 404 = @404;

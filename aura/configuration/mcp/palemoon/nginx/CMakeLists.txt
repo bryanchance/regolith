@@ -126,4 +126,6 @@ pyPreprocess(
     -DNGX_SUBDOMAIN="${varSubdomain}"
     -DNGX_ENABLE_PHP=1
     -DPHP_VERSION_56=1
+    -DNGX_ENABLE_PHP_404=1
+    -DNGX_ENABLE_ENANO=1
 )
