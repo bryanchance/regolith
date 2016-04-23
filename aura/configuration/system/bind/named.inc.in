@@ -27,3 +27,13 @@ zone "royalgeekworld.net" {
 	type master;
 	file "/@BIND_CONF_PREFIX@/royalgeekworld.net.zone";
 };
+
+zone "susantobinart.com" {
+	type master;
+	file "/@BIND_CONF_PREFIX@/susantobinart.com.zone";
+};
+
+zone "kokomosaferefuge.org" {
+	type master;
+	file "/@BIND_CONF_PREFIX@/kokomosaferefuge.org.zone";
+};

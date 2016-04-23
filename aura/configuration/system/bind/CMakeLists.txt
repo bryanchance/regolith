@@ -38,4 +38,10 @@ pyPreprocess(${varBindDomain}.zone.in ${varBindDomain}.zone -Fsubstitution -DAUR
 # Preprocess zones for class: unaffiliated
 ### Add zones for kokomosaferefuge and dovedesign
 
+set(varBindDomain "susantobinart.com")
+pyPreprocess(standard.zone.in ${varBindDomain}.zone -Fsubstitution -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+
+set(varBindDomain "kokomosaferefuge.org")
+pyPreprocess(standard.zone.in ${varBindDomain}.zone -Fsubstitution -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+
 # Preprocess zones for domains not on Quartz
