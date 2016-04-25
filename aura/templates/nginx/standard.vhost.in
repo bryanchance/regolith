@@ -15,7 +15,7 @@
         access_log off;
         location @404 { return 404; }
         location / {
-#ifdef NGX_ENABLE_CMSMS
+#if defined(NGX_ENABLE_CMSMS) || defined(NGX_ENABLE_WORDPRESS)
             try_files $uri $uri/ /index.php?page=$request_uri;
 #elif NGX_ENABLE_ENANO
             try_files $uri $uri/ @enano-rewrite;
