@@ -53,4 +53,7 @@ pyPreprocess(
     -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
     -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_ENABLE_PHP=1
+    -DNGX_ENABLE_WORDPRESS=1
+    -DPHP_VERSION_56=1
 )
