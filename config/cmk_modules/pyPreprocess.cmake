@@ -26,7 +26,7 @@ function(pyPreprocess varInputFile varOutputFile)
   # XXX: TODO - MAKE varOutputFile based on varInputFile and strip out '.in' extension
   add_custom_command (
     WORKING_DIRECTORY ${mk_srcdir}
-    COMMAND python ${mk_depth}/config/preprocessor/Preprocessor.py ${mk_srcdir}/${varInputFile} ${varDefines} > ${mk_objdir}/${varOutputFile}.pp
+    COMMAND python ${mk_depth}/config/preprocessor/Preprocessor.py ${mk_srcdir}/${varInputFile} ${varDefines} -o ${mk_objdir}/${varOutputFile}.pp
     COMMAND cp -v ${mk_objdir}/${varOutputFile}.pp ${CMAKE_INSTALL_PREFIX}/${mk_relpath}/${varOutputFile}
     DEPENDS ${varOutputDepend}
     OUTPUT ${mk_objdir}/${varOutputFile}.pp
