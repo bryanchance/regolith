@@ -3,7 +3,7 @@ mk_paths()
 # Set variables about the build
 
 ### Set some nifty vars
-set(varTargetAuraVersion "4.0b3")
+set(varTargetAuraVersion "4.0b4")
 
 ### If the build script has a blank variable that is passed as a define then target "Quartz" 
 if (NOT CMK_SERVER_TARGET)
