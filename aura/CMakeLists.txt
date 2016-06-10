@@ -6,16 +6,16 @@ mk_paths()
 set(varTargetAuraVersion "4.0b4")
 
 ### If the build script has a blank variable that is passed as a define then target "Quartz" 
-if (NOT CMK_SERVER_TARGET)
-set (CMK_SERVER_TARGET "quartz")
+if (NOT AURA_SERVER_TARGET)
+set (AURA_SERVER_TARGET "quartz")
 endif ()
 
 ### If the build script variable is not blank then evaluate it
-if (CMK_SERVER_TARGET)
-	if(CMK_SERVER_TARGET MATCHES "quartz")
+if (AURA_SERVER_TARGET)
+	if(AURA_SERVER_TARGET MATCHES "quartz")
 		set(varTargetServerQuartz 1)
 		set(varTargetServerRegolith)
-	elseif(CMK_SERVER_TARGET MATCHES "regolith")
+	elseif(AURA_SERVER_TARGET MATCHES "regolith")
 		set(varTargetServerQuartz)
 		set(varTargetServerRegolith 1)
 	else()
