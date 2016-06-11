@@ -1,15 +1,40 @@
-# CMake Basics
-project (aura NONE)
-cmake_minimum_required(VERSION 3.4)
-set(CMAKE_VERBOSE_MAKEFILE "0")
-
-include(${CMAKE_SOURCE_DIR}/config/cmk_modules/mk_path.cmake)
 mk_paths()
 
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/dist/bin)
-set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/dist/bin")
+# Set variables about the build
 
-include(${CMAKE_SOURCE_DIR}/config/cmk_modules/pyPreprocess.cmake)
-include(${CMAKE_SOURCE_DIR}/config/cmk_modules/pyPP-nginx.cmake)
+### Set some nifty vars
+set(varTargetAuraVersion "4.0b4")
 
-add_subdirectory(aura)
+### If the build script has a blank variable that is passed as a define then target "Quartz" 
+if (NOT AURA_SERVER_TARGET)
+set (AURA_SERVER_TARGET "quartz")
+endif ()
+
+### If the build script variable is not blank then evaluate it
+if (AURA_SERVER_TARGET)
+	if(AURA_SERVER_TARGET MATCHES "quartz")
+		set(varTargetServerQuartz 1)
+		set(varTargetServerRegolith)
+	elseif(AURA_SERVER_TARGET MATCHES "regolith")
+		set(varTargetServerQuartz)
+		set(varTargetServerRegolith 1)
+	else()
+    message( FATAL_ERROR "You did not specify a valid target server." )
+	endif()
+else()
+  message( FATAL_ERROR "You did not specify a target server." )
+endif()
+
+### Server Specific Info
+if(varTargetServerQuartz)
+	set(varSystemIPv4 "173.44.61.231")
+	set(varSystemIPv6 "2607:ff48:1:302::dc50:5a24")
+	set(varSystemServerName "quartz.server.binocnetwork.com")
+elseif(varTargetServerRegolith)
+	set(varSystemIPv4 "173.44.61.210")
+	set(varSystemIPv6 "2607:ff48:1:302::53cf:d149")
+	set(varSystemServerName "regolith.server.binocnetwork.com")
+endif()
+
+file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
+add_subdirectory(configuration)
