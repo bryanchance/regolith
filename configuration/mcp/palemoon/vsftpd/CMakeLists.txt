@@ -1,6 +1,7 @@
 build_macro_mkPaths()
+SETUP_FINAL_TARGET()
 
-file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
+
 
 build_func_preprocess(vsftpd.service aura-${varUserClass}-${varUserName}-vsftpd.service)
 build_func_preprocess(vsftpd.conf vsftpd.conf)

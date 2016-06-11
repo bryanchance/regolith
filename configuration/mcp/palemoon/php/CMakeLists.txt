@@ -1,11 +1,12 @@
 build_macro_mkPaths()
+SETUP_FINAL_TARGET()
 
-file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
-file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath}/session)
+
+file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET}/session)
 
 # php-fpm pool config
 build_func_preprocess(
-    ${mk_depth}/aura/templates/php/php-pool.conf.in
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php-pool.conf.in
     php56-pool.conf
     -Fsubstitution
     -DAURA_USER_CLASS="${varUserClass}"
@@ -15,7 +16,7 @@ build_func_preprocess(
 
 # php-fpm pool config
 build_func_preprocess(
-    ${mk_depth}/aura/templates/php/php-pool.conf.in
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php-pool.conf.in
     php70-pool.conf
     -Fsubstitution
     -DAURA_USER_CLASS="${varUserClass}"
