@@ -7,7 +7,6 @@ SETUP_FINAL_TARGET()
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.service.in
     ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-nginx.service
-    -Fsubstitution
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_USER_CLASS="${varUserClass}"
     -DAURA_USER_NAME="${varUserName}"
@@ -16,8 +15,7 @@ build_func_preprocess(
 # Userscope Nginx Server Instance
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
-    nginx.conf
-    -Fsubstitution
+    ${FINAL_TARGET}/nginx.conf
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_IPV4="${varSystemIPv4}"
     -DAURA_IPV6="${varSystemIPv6}"
@@ -29,8 +27,7 @@ build_func_preprocess(
 set(varDomain "binaryoutcast.com")
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    www.${varDomain}.proxy
-    -Fsubstitution
+    ${FINAL_TARGET}/www.${varDomain}.proxy
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_IPV4="${varSystemIPv4}"
     -DAURA_IPV6="${varSystemIPv6}"
@@ -46,8 +43,7 @@ set(varRootDomain "binaryoutcast.com")
 set(varDomain ${varRootDomain})
 build_func_preprocess(
     www.${varDomain}.vhost.in
-    www.${varDomain}.vhost
-    -Fsubstitution
+    ${FINAL_TARGET}/www.${varDomain}.vhost
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_USER_CLASS="${varUserClass}"
     -DAURA_USER_NAME="${varUserName}"
@@ -60,8 +56,7 @@ build_func_preprocess(
 set(varDomain "techcentral.binaryoutcast.com")
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${varDomain}.proxy
-    -Fsubstitution
+    ${FINAL_TARGET}/${varDomain}.proxy
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_IPV4="${varSystemIPv4}"
     -DAURA_IPV6="${varSystemIPv6}"
@@ -76,8 +71,7 @@ set(varRootDomain "binaryoutcast.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
 build_func_preprocess(
     ${varDomain}.vhost.in
-    ${varDomain}.vhost
-    -Fsubstitution
+    ${FINAL_TARGET}/${varDomain}.vhost
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_USER_CLASS="${varUserClass}"
     -DAURA_USER_NAME="${varUserName}"
@@ -90,8 +84,7 @@ build_func_preprocess(
 set(varDomain "repository.binaryoutcast.com")
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${varDomain}.proxy
-    -Fsubstitution
+    ${FINAL_TARGET}/${varDomain}.proxy
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_IPV4="${varSystemIPv4}"
     -DAURA_IPV6="${varSystemIPv6}"
@@ -106,8 +99,7 @@ set(varRootDomain "binaryoutcast.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-    ${varDomain}.vhost
-    -Fsubstitution
+    ${FINAL_TARGET}/${varDomain}.vhost
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_USER_CLASS="${varUserClass}"
     -DAURA_USER_NAME="${varUserName}"

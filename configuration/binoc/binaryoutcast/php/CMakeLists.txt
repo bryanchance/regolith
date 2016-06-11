@@ -7,7 +7,7 @@ file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET}/session)
 # php-fpm pool config
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php-pool.conf.in
-    php-pool.conf -Fsubstitution
+    ${FINAL_TARGET}/php-pool.conf 
     -DAURA_USER_CLASS="${varUserClass}"
     -DAURA_USER_NAME="${varUserName}"
     -DPHP_ENABLE_LARGE_POOL=1
@@ -16,8 +16,7 @@ build_func_preprocess(
 # php-fpm pool config
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php-pool.conf.in
-    php56-pool.conf
-    -Fsubstitution
+    ${FINAL_TARGET}/php56-pool.conf
     -DAURA_USER_CLASS="${varUserClass}"
     -DAURA_USER_NAME="${varUserName}"
     -DPHP_ENABLE_LARGE_POOL=1
@@ -27,8 +26,7 @@ build_func_preprocess(
 # php-fpm pool config
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php-pool.conf.in
-    php70-pool.conf
-    -Fsubstitution
+    ${FINAL_TARGET}/php70-pool.conf
     -DAURA_USER_CLASS="${varUserClass}"
     -DAURA_USER_NAME="${varUserName}"
     -DPHP_ENABLE_LARGE_POOL=1
