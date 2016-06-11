@@ -5,8 +5,8 @@ SETUP_FINAL_TARGET()
 
 # Userscope Nginx systemd Service
 build_func_preprocess(
-${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.service.in
-aura-${varUserClass}-${varUserName}-nginx.service
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.service.in
+    ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-nginx.service
     -Fsubstitution
     -DAURA_VERSION="${varTargetAuraVersion}"
     -DAURA_USER_CLASS="${varUserClass}"
