@@ -3,7 +3,7 @@ build_macro_mkPaths()
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 
 # Userscope Nginx systemd Service
-pyPreprocess(
+build_func_preprocess(
 ${mk_depth}/aura/templates/nginx/nginx.service.in
 aura-${varUserClass}-${varUserName}-nginx.service
     -Fsubstitution
@@ -13,7 +13,7 @@ aura-${varUserClass}-${varUserName}-nginx.service
 )
 
 # Userscope Nginx Server Instance
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.conf.in
     nginx.conf
     -Fsubstitution
@@ -26,7 +26,7 @@ pyPreprocess(
 
 # Proxy file for binaryoutcast.com
 set(varDomain "binaryoutcast.com")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     www.${varDomain}.proxy
     -Fsubstitution
@@ -43,7 +43,7 @@ pyPreprocess(
 set(varSubdomain "www")
 set(varRootDomain "binaryoutcast.com")
 set(varDomain ${varRootDomain})
-pyPreprocess(
+build_func_preprocess(
     www.${varDomain}.vhost.in
     www.${varDomain}.vhost
     -Fsubstitution
@@ -57,7 +57,7 @@ pyPreprocess(
 
 # Proxy file for techcentral.binaryoutcast.com
 set(varDomain "techcentral.binaryoutcast.com")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     ${varDomain}.proxy
     -Fsubstitution
@@ -73,7 +73,7 @@ pyPreprocess(
 set(varSubdomain "techcentral")
 set(varRootDomain "binaryoutcast.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(
+build_func_preprocess(
     ${varDomain}.vhost.in
     ${varDomain}.vhost
     -Fsubstitution
@@ -87,7 +87,7 @@ pyPreprocess(
 
 # Proxy file for repository.binaryoutcast.com
 set(varDomain "repository.binaryoutcast.com")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     ${varDomain}.proxy
     -Fsubstitution
@@ -103,7 +103,7 @@ pyPreprocess(
 set(varSubdomain "repository")
 set(varRootDomain "binaryoutcast.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     ${varDomain}.vhost
     -Fsubstitution

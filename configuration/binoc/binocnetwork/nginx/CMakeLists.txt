@@ -3,7 +3,7 @@ build_macro_mkPaths()
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 
 # Userscope Nginx systemd Service
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.service.in
     aura-${varUserClass}-${varUserName}-nginx.service
     -Fsubstitution
@@ -13,7 +13,7 @@ pyPreprocess(
 )
 
 # Userscope Nginx Server Instance
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.conf.in
     nginx.conf
     -Fsubstitution
@@ -27,7 +27,7 @@ pyPreprocess(
 if(varTargetServerQuartz)
 # Proxy file for binocnetwork.com
     set(varDomain "binocnetwork.com")
-    pyPreprocess(
+    build_func_preprocess(
         ${mk_depth}/aura/templates/nginx/standard.proxy.in
         www.${varDomain}.proxy
         -Fsubstitution
@@ -44,7 +44,7 @@ if(varTargetServerQuartz)
     set(varSubdomain "www")
     set(varRootDomain "binocnetwork.com")
     set(varDomain ${varRootDomain})
-    pyPreprocess(
+    build_func_preprocess(
         ${mk_depth}/aura/templates/nginx/standard.vhost.in
         www.${varDomain}.vhost
         -Fsubstitution
@@ -63,7 +63,7 @@ if(varTargetServerQuartz)
 elseif(varTargetServerRegolith)
     set(varDomain "regolith.server.binocnetwork.com")
 endif()
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     ${varDomain}.proxy
     -Fsubstitution
@@ -83,7 +83,7 @@ elseif(varTargetServerRegolith)
 endif()
 set(varRootDomain "binocnetwork.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     ${varDomain}.vhost
     -Fsubstitution

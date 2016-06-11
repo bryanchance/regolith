@@ -3,7 +3,7 @@ build_macro_mkPaths()
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 
 # Userscope Nginx systemd Service
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.service.in
     aura-${varUserClass}-${varUserName}-nginx.service
     -Fsubstitution
@@ -13,7 +13,7 @@ pyPreprocess(
 )
 
 # Userscope Nginx Server Instance
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.conf.in
     nginx.conf
     -Fsubstitution
@@ -26,7 +26,7 @@ pyPreprocess(
 
 # Proxy file for susantobinart.com
 set(varDomain "susantobinart.com")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     www.${varDomain}.proxy
     -Fsubstitution
@@ -43,7 +43,7 @@ pyPreprocess(
 set(varSubdomain "www")
 set(varRootDomain "susantobinart.com")
 set(varDomain ${varRootDomain})
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     www.${varDomain}.vhost
     -Fsubstitution

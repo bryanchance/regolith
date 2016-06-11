@@ -4,7 +4,7 @@ file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath}/session)
 
 # php-fpm pool config
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/php/php-pool.conf.in
     php56-pool.conf
     -Fsubstitution

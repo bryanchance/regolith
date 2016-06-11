@@ -3,7 +3,7 @@ build_macro_mkPaths()
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 
 # Userscope Nginx systemd Service
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.service.in
     aura-${varUserClass}-${varUserName}-nginx.service
     -Fsubstitution
@@ -13,7 +13,7 @@ pyPreprocess(
 )
 
 # Userscope Nginx Server Instance
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.conf.in
     nginx.conf
     -Fsubstitution
@@ -26,7 +26,7 @@ pyPreprocess(
 
 # Proxy file for royalgeekworld.com
 set(varDomain "royalgeekworld.com")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     www.${varDomain}.proxy
     -Fsubstitution
@@ -43,7 +43,7 @@ pyPreprocess(
 set(varSubdomain "www")
 set(varRootDomain "royalgeekworld.com")
 set(varDomain ${varRootDomain})
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     www.${varDomain}.vhost -Fsubstitution
     -DAURA_VERSION="${varTargetAuraVersion}"
@@ -58,7 +58,7 @@ pyPreprocess(
 
 # Proxy file for ccfans.royalgeekworld.com
 set(varDomain "ccfans.royalgeekworld.com")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     ${varDomain}.proxy
     -Fsubstitution
@@ -74,7 +74,7 @@ pyPreprocess(
 set(varSubdomain "ccfans")
 set(varRootDomain "royalgeekworld.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     ${varDomain}.vhost
     -Fsubstitution

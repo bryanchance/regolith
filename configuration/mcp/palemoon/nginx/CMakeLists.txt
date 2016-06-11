@@ -3,7 +3,7 @@ build_macro_mkPaths()
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 
 # Userscope Nginx systemd Service
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.service.in
     aura-${varUserClass}-${varUserName}-nginx.service
     -Fsubstitution
@@ -13,7 +13,7 @@ pyPreprocess(
 )
 
 # Userscope Nginx Server Instance
-pyPreprocess(
+build_func_preprocess(
 ${mk_depth}/aura/templates/nginx/nginx.conf.in
     nginx.conf
     -Fsubstitution
@@ -26,7 +26,7 @@ ${mk_depth}/aura/templates/nginx/nginx.conf.in
 
 # Proxy file for addons.palemoon.org
 set(varDomain "addons.palemoon.org")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     ${varDomain}.proxy
     -Fsubstitution
@@ -45,7 +45,7 @@ pyPreprocess(
 set(varSubdomain "addons")
 set(varRootDomain "palemoon.org")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(
+build_func_preprocess(
     ${varDomain}.vhost.in
     ${varDomain}.vhost
     -Fsubstitution
@@ -61,7 +61,7 @@ pyPreprocess(
 
 # Proxy file for dev.addons.palemoon.org
 set(varDomain "dev.addons.palemoon.org")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     ${varDomain}.proxy
     -Fsubstitution
@@ -79,7 +79,7 @@ pyPreprocess(
 set(varSubdomain "dev.addons")
 set(varRootDomain "palemoon.org")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     ${varDomain}.vhost
     -Fsubstitution
@@ -96,7 +96,7 @@ pyPreprocess(
 
 # Proxy file for developer.palemoon.org
 set(varDomain "developer.palemoon.org")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     ${varDomain}.proxy
     -Fsubstitution
@@ -114,7 +114,7 @@ pyPreprocess(
 set(varSubdomain "developer")
 set(varRootDomain "palemoon.org")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     ${varDomain}.vhost
     -Fsubstitution

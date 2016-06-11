@@ -3,7 +3,7 @@ build_macro_mkPaths()
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 
 # Userscope Nginx systemd Service
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.service.in
     aura-${varUserClass}-${varUserName}-nginx.service
     -Fsubstitution -DAURA_VERSION="${varTargetAuraVersion}"
@@ -12,7 +12,7 @@ pyPreprocess(
 )
 
 # Userscope Nginx Server Instance
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/nginx.conf.in
     nginx.conf
     -Fsubstitution
@@ -25,7 +25,7 @@ pyPreprocess(
 
 # Proxy file for mattatobin.com
 set(varDomain "mattatobin.com")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     www.${varDomain}.proxy
     -Fsubstitution
@@ -42,7 +42,7 @@ pyPreprocess(
 set(varSubdomain "www")
 set(varRootDomain "mattatobin.com")
 set(varDomain ${varRootDomain})
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     www.${varDomain}.vhost
     -Fsubstitution
@@ -59,7 +59,7 @@ pyPreprocess(
 
 # Proxy file for personal.mattatobin.com
 set(varDomain "personal.mattatobin.com")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.proxy.in
     ${varDomain}.proxy
     -Fsubstitution
@@ -75,7 +75,7 @@ pyPreprocess(
 set(varSubdomain "personal")
 set(varRootDomain "mattatobin.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
-pyPreprocess(
+build_func_preprocess(
     ${mk_depth}/aura/templates/nginx/standard.vhost.in
     ${varDomain}.vhost
     -Fsubstitution
