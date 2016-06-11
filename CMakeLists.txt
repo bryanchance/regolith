@@ -1,6 +1,6 @@
 build_macro_mkPaths()
 
-set(varTargetAuraVersion "4.0b4")
+set(varTargetAuraVersion "4.0b5")
 
 # Figure out FINAL_TARGET in a ridiculous way
 macro(SETUP_FINAL_TARGET)
