@@ -1,9 +1,14 @@
-mk_paths()
+build_macro_mkPaths()
 
-# Set variables about the build
-
-### Set some nifty vars
 set(varTargetAuraVersion "4.0b4")
+
+# Figure out FINAL_TARGET in a ridiculous way
+macro(SETUP_FINAL_TARGET)
+    string(REPLACE "${mk_topsrcdir}/projects/${BUILD_PROJECT}/" "" _PATH_DIFF ${mk_srcdir})
+
+    set(FINAL_TARGET ${_PATH_DIFF})
+    file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET})
+endmacro(SETUP_FINAL_TARGET)
 
 ### If the build script has a blank variable that is passed as a define then target "Quartz" 
 if (NOT AURA_SERVER_TARGET)
@@ -36,5 +41,4 @@ elseif(varTargetServerRegolith)
 	set(varSystemServerName "regolith.server.binocnetwork.com")
 endif()
 
-file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${mk_relpath})
 add_subdirectory(configuration)
