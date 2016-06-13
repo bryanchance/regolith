@@ -8,31 +8,81 @@ set(varBindNS1 "ns1.binocnetwork.com")
 set(varBindNS2 "ns2.binocnetwork.com")
 set(varBindConfPrefix "aura/configuration/system/bind")
 
+set(varBindDefines
+    ${varAuraDefines}
+    -DBIND_CONF_PREFIX="${varBindConfPrefix}"
+    -DBIND_NS1="${varBindNS1}"
+    -DBIND_NS2="${varBindNS2}"
+)
+
 # BIND Service
-build_func_preprocess(bind.service.in ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-bind.service  -DAURA_USER_CLASS="${varUserClass}" -DAURA_USER_NAME="${varUserName}" -DBIND_CONF_PREFIX="${varBindConfPrefix}")
+build_func_preprocess(
+    bind.service.in
+    ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-bind.service
+    ${varBindDefines}
+)
 
 # Preprocess Main BIND Files
-build_func_preprocess(named.conf.in ${FINAL_TARGET}/named.conf  -DBIND_CONF_PREFIX="${varBindConfPrefix}")
-build_func_preprocess(named.inc.in ${FINAL_TARGET}/named.inc  -DBIND_CONF_PREFIX="${varBindConfPrefix}")
+build_func_preprocess(
+    named.conf.in
+    ${FINAL_TARGET}/named.conf
+    ${varBindDefines}
+)
+
+build_func_preprocess(
+    named.inc.in
+    ${FINAL_TARGET}/named.inc
+    ${varBindDefines}
+)
 
 # Preprocess zones for class: binoc
 set(varBindDomain "binocnetwork.com")
-build_func_preprocess(${varBindDomain}.zone.in ${FINAL_TARGET}/${varBindDomain}.zone  -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+build_func_preprocess(
+    ${varBindDomain}.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 
 set(varBindDomain "binocglobal.com")
-build_func_preprocess(standard.zone.in ${FINAL_TARGET}/${varBindDomain}.zone  -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+build_func_preprocess(
+    standard.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 
 set(varBindDomain "binaryoutcast.com")
-build_func_preprocess(${varBindDomain}.zone.in ${FINAL_TARGET}/${varBindDomain}.zone  -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+build_func_preprocess(
+    ${varBindDomain}.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 
 set(varBindDomain "mattatobin.com")
-build_func_preprocess(${varBindDomain}.zone.in ${FINAL_TARGET}/${varBindDomain}.zone  -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+build_func_preprocess(
+    ${varBindDomain}.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 
 set(varBindDomain "royalgeekworld.com")
-build_func_preprocess(${varBindDomain}.zone.in ${FINAL_TARGET}/${varBindDomain}.zone  -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+build_func_preprocess(
+    ${varBindDomain}.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 
 set(varBindDomain "royalgeekworld.net")
-build_func_preprocess(${varBindDomain}.zone.in ${FINAL_TARGET}/${varBindDomain}.zone  -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+build_func_preprocess(
+    ${varBindDomain}.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 
 # Preprocess zones for class: staff
 
@@ -40,9 +90,19 @@ build_func_preprocess(${varBindDomain}.zone.in ${FINAL_TARGET}/${varBindDomain}.
 ### Add zones for kokomosaferefuge and dovedesign
 
 set(varBindDomain "susantobinart.com")
-build_func_preprocess(standard.zone.in ${FINAL_TARGET}/${varBindDomain}.zone  -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+build_func_preprocess(
+    standard.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 
 set(varBindDomain "kokomosaferefuge.org")
-build_func_preprocess(standard.zone.in ${FINAL_TARGET}/${varBindDomain}.zone  -DAURA_IPV4="${varSystemIPv4}" -DAURA_IPV6="${varSystemIPv6}" -DBIND_NS1="${varBindNS1}" -DBIND_NS2="${varBindNS2}" -DBIND_DOMAIN="${varBindDomain}")
+build_func_preprocess(
+    standard.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 
 # Preprocess zones for domains not on Quartz

@@ -7,20 +7,14 @@ AURA_DEFINES()
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.service.in
     ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-nginx.service
-    -DAURA_VERSION="${varTargetAuraVersion}"
-    -DAURA_USER_CLASS="${varUserClass}"
-    -DAURA_USER_NAME="${varUserName}"
+    ${varAuraDefines}
 )
 
 # Userscope Nginx Server Instance
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
     ${FINAL_TARGET}/nginx.conf
-    -DAURA_VERSION="${varTargetAuraVersion}"
-    -DAURA_IPV4="${varSystemIPv4}"
-    -DAURA_IPV6="${varSystemIPv6}"
-    -DAURA_USER_CLASS="${varUserClass}"
-    -DAURA_USER_NAME="${varUserName}"
+    ${varAuraDefines}
 )
 
 # Proxy file for Sever Subdomain
@@ -28,11 +22,7 @@ set(varDomain "valik.staff.binocnetwork.com")
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
     ${FINAL_TARGET}/${varDomain}.proxy
-    -DAURA_VERSION="${varTargetAuraVersion}"
-    -DAURA_IPV4="${varSystemIPv4}"
-    -DAURA_IPV6="${varSystemIPv6}"
-    -DAURA_USER_CLASS="${varUserClass}"
-    -DAURA_USER_NAME="${varUserName}"
+    ${varAuraDefines}
     -DNGX_DOMAIN="${varDomain}"
 )
 
@@ -43,9 +33,7 @@ set(varDomain "${varSubdomain}.${varRootDomain}")
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
     ${FINAL_TARGET}/${varDomain}.vhost
-    -DAURA_VERSION="${varTargetAuraVersion}"
-    -DAURA_USER_CLASS="${varUserClass}"
-    -DAURA_USER_NAME="${varUserName}"
+    ${varAuraDefines}
     -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
     -DNGX_SUBDOMAIN="${varSubdomain}"

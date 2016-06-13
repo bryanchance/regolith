@@ -8,7 +8,6 @@ file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET}/session)
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php-pool.conf.in
     ${FINAL_TARGET}/php56-pool.conf
-    -DAURA_USER_CLASS="${varUserClass}"
-    -DAURA_USER_NAME="${varUserName}"
+    ${varAuraDefines}
     -DPHP_VERSION_56=1
 )
