@@ -1,8 +1,3 @@
-build_macro_mkPaths()
-SETUP_FINAL_TARGET()
-
-
-
 # Set directories
 
 ### These are always included
