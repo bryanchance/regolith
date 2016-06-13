@@ -15,6 +15,16 @@ if (NOT AURA_SERVER_TARGET)
 set (AURA_SERVER_TARGET "quartz")
 endif ()
 
+### AURA_DEFINES
+macro(AURA_DEFINES)
+set(varAuraDefines
+    -DAURA_VERSION="${varTargetAuraVersion}"
+    -DAURA_IPV4="${varSystemIPv4}"
+    -DAURA_IPV6="${varSystemIPv6}"
+    -DAURA_USER_CLASS="${varUserClass}"
+    -DAURA_USER_NAME="${varUserName}"
+)
+endmacro(AURA_DEFINES)
 ### If the build script variable is not blank then evaluate it
 if (AURA_SERVER_TARGET)
 	if(AURA_SERVER_TARGET MATCHES "quartz")

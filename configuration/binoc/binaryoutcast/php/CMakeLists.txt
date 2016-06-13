@@ -1,6 +1,6 @@
 build_macro_mkPaths()
 SETUP_FINAL_TARGET()
-
+AURA_DEFINES()
 
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET}/session)
 

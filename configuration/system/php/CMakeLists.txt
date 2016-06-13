@@ -1,6 +1,6 @@
 build_macro_mkPaths()
 SETUP_FINAL_TARGET()
-
+AURA_DEFINES()
 
 
 # System PHP systemd Service
