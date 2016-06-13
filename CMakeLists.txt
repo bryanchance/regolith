@@ -42,3 +42,5 @@ elseif(varTargetServerRegolith)
 endif()
 
 add_subdirectory(configuration)
+
+build_func_package(aura-configuration-${AURA_SERVER_TARGET}-${varTargetAuraVersion}.zip)
