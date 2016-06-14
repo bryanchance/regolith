@@ -57,7 +57,7 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
     build_func_package(aura-configuration-${AURA_SERVER_TARGET}-${varTargetAuraVersion}.zip)
 else()
     cmake_minimum_required (VERSION 2.8.11)
-    project (adblock-latitude NONE)
+    project (aura-infra NONE)
 
     message(
         FATAL_ERROR
