@@ -83,4 +83,5 @@ build_func_preprocess(
     -DNGX_ROOTDOMAIN="${varRootDomain}"
     -DNGX_SUBDOMAIN="${varSubdomain}"
     -DNGX_ENABLE_PHP=1
+    -DPHP_VERSION_56=1
 )
