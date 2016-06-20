@@ -2,27 +2,12 @@ build_macro_mkPaths()
 SETUP_FINAL_TARGET()
 AURA_DEFINES()
 
-
-build_func_preprocess(
-    capture
-    ${FINAL_TARGET}/capture
-    ${varAuraDefines}
+# Copy files wholesale
+set(SOURCE_FILES
+    ${mk_srcdir}/capture
+    ${mk_srcdir}/files
+    ${mk_srcdir}/mattatobin
+    ${mk_srcdir}/private
 )
 
-build_func_preprocess(
-    files
-    ${FINAL_TARGET}/files
-    ${varAuraDefines}
-)
-
-build_func_preprocess(
-    mattatobin
-    ${FINAL_TARGET}/mattatobin
-    ${varAuraDefines}
-)
-
-build_func_preprocess(
-    private
-    ${FINAL_TARGET}/private
-    ${varAuraDefines}
-)
+COPY_TO_DIST("${SOURCE_FILES}")

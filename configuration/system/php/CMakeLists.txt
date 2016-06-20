@@ -2,6 +2,13 @@ build_macro_mkPaths()
 SETUP_FINAL_TARGET()
 AURA_DEFINES()
 
+# Copy files wholesale
+set(SOURCE_FILES
+    ${mk_srcdir}/php.ini
+)
+
+COPY_TO_DIST("${SOURCE_FILES}")
+
 
 # System PHP systemd Service
 build_func_preprocess(
@@ -44,11 +51,4 @@ build_func_preprocess(
     ${FINAL_TARGET}/php70.conf
     ${varAuraDefines}
     -DPHP_VERSION_70=1
-)
-
-
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php.ini.in
-    ${FINAL_TARGET}/php.ini
-    ${varAuraDefines}
 )

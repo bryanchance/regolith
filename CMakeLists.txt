@@ -11,9 +11,17 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
         file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET})
     endmacro(SETUP_FINAL_TARGET)
 
+    function(COPY_TO_DIST _FILE_LIST)
+        foreach(_FILE ${_FILE_LIST})
+            string(REPLACE "${mk_topsrcdir}/projects/${BUILD_PROJECT}/" "" _FILE_NAME ${_FILE})
+            message(STATUS "Copying: ${_FILE_NAME}")
+            file(COPY ${_FILE} DESTINATION "${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET}/")
+        endforeach()
+    endfunction(COPY_TO_DIST)
+    
     ### If the build script has a blank variable that is passed as a define then target "Quartz" 
     if (NOT AURA_SERVER_TARGET)
-    set (AURA_SERVER_TARGET "quartz")
+        set (AURA_SERVER_TARGET "quartz")
     endif ()
 
     ### AURA_DEFINES
