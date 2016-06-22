@@ -1,9 +1,3 @@
-	server {
-		listen unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
-		server_name	@NGX_DOMAIN@;
-		root /aura/accounts/@AURA_USER_CLASS@/@AURA_USER_NAME@/sites/@NGX_ROOTDOMAIN@/@NGX_SUBDOMAIN@;
-		index index.htm index.html index.php;
-
 		# Eval scheme manually because we have special cases but otherwise do NOT want content served from HTTP
 		# This terrible hack is mainly because of a CMSMS quirk and will be resolved fully with Phoebus
 		# $https_x_real_scheme is passed from the .proxy file
@@ -61,21 +55,3 @@
 		location ~* ^/(\.|phoebus\/datastore/(.*)\.php$) {
 			log_not_found off; return 404;
 		}
-
-		# Self explanatory 
-		location @404 {	return 404;	}
-
-		# Root location block to CMSMS if not actual file
-		location / {
-			try_files $uri $uri/ /index.php?page=$request_uri;
-		}
-		
-		# Send all php files to php-fpm
-		location ~ \.php$ {
-			include /aura/configuration/system/nginx/standard-php.inc;
-            fastcgi_intercept_errors on;
-            error_page 404 = @404;
-			fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
-		}
-		add_header X-BinOC socket=true always;
-	}

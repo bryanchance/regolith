@@ -34,7 +34,7 @@ set(varSubdomain "addons")
 set(varRootDomain "palemoon.org")
 set(varDomain "${varSubdomain}.${varRootDomain}")
 build_func_preprocess(
-    ${varDomain}.vhost.in
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
     ${FINAL_TARGET}/${varDomain}.vhost
     ${varAuraDefines}
     -DNGX_DOMAIN="${varDomain}"
@@ -42,6 +42,7 @@ build_func_preprocess(
     -DNGX_SUBDOMAIN="${varSubdomain}"
     -DNGX_ENABLE_PHP=1
     -DPHP_VERSION_56=1
+    -DNGX_INCLUDE="${mk_srcdir}/${varDomain}.vhost.inc"
 )
 
 # Proxy file for dev.addons.palemoon.org
