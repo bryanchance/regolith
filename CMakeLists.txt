@@ -51,8 +51,8 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
 
     ### Server Specific Info
     if(varTargetServerQuartz)
-        set(varSystemIPv4 "173.44.61.231")
-        set(varSystemIPv6 "2607:ff48:1:302::dc50:5a24")
+        set(varSystemIPv4 "45.63.2.9")
+        set(varSystemIPv6 "2001:19f0:200:2d91::7321:a697")
         set(varSystemServerName "quartz.server.binocnetwork.com")
     elseif(varTargetServerRegolith)
         set(varSystemIPv4 "173.44.61.210")
