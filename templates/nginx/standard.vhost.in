@@ -13,6 +13,11 @@
         autoindex off;
 #endif
         access_log off;
+
+#ifdef NGX_INCLUDE
+#include @NGX_INCLUDE@
+#endif        
+
         location @404 { return 404; }
         location / {
 #if defined(NGX_ENABLE_CMSMS) || defined(NGX_ENABLE_WORDPRESS)
