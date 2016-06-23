@@ -1,102 +1,127 @@
+# ===| Macros |================================================================
+
 build_macro_mkPaths()
 SETUP_FINAL_TARGET()
 AURA_DEFINES()
 
+# =============================================================================
 
-# Userscope Nginx systemd Service
+# ===| User Nginx Instance SystemD Unit |======================================
+
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.service.in
     ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-nginx.service
     ${varAuraDefines}
 )
 
-# Userscope Nginx Server Instance
+# =============================================================================
+
+# ===| User Nginx Server Configuration |=======================================
+
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
     ${FINAL_TARGET}/nginx.conf
     ${varAuraDefines}
 )
 
-# Proxy file for addons.palemoon.org
-set(varDomain "addons.palemoon.org")
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${FINAL_TARGET}/${varDomain}.proxy
-    ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
-    -DNGX_ENABLE_SSL=1
-    -DNGX_SSL_CERT="${varDomain}"
-    -DNGX_ENABLE_CLOUDFLARE=1
-)
+# =============================================================================
 
-# VHOST for addons.palemoon.org
-set(varSubdomain "addons")
+# ===| addons.palemoon.org |===================================================
+
+# Set Variables to be used as Preprocessor defines
 set(varRootDomain "palemoon.org")
-set(varDomain "${varSubdomain}.${varRootDomain}")
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-    ${FINAL_TARGET}/${varDomain}.vhost
+set(varSubDomain "addons")
+set(varNginxDefines
     ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
-    -DNGX_SUBDOMAIN="${varSubdomain}"
-    -DNGX_INCLUDE="${mk_srcdir}/${varDomain}.vhost.inc"
-    -DNGX_ENABLE_CMSMS=1
+    -DNGX_SUBDOMAIN="${varSubDomain}"
+    -DNGX_ENABLE_SSL=1
+    -DNGX_SSL_CERT="${varSubDomain}.${varRootDomain}"
+    -DNGX_ENABLE_CLOUDFLARE=1
+    -DNGX_INCLUDE="${mk_srcdir}/${varSubDomain}.${varRootDomain}.vhost.inc"
     -DNGX_ENABLE_PHP=1
+    -DNGX_ENABLE_CMSMS=1
     -DPHP_VERSION_56=1
 )
 
-# Proxy file for dev.addons.palemoon.org
-set(varDomain "dev.addons.palemoon.org")
+# Proxy file
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${FINAL_TARGET}/${varDomain}.proxy
-    ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
-    -DNGX_ENABLE_SSL=1
-    -DNGX_SSL_CERT="addons.palemoon.org"
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
+    ${varNginxDefines}
 )
 
-# VHOST for dev.addons.palemoon.org
-set(varSubdomain "dev.addons")
-set(varRootDomain "palemoon.org")
-set(varDomain "${varSubdomain}.${varRootDomain}")
+# VHost file
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-    ${FINAL_TARGET}/${varDomain}.vhost
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
+    ${varNginxDefines}
+)
+
+# =============================================================================
+
+# ===| dev.addons.palemoon.org |===============================================
+
+# Set Variables to be used as Preprocessor defines
+set(varRootDomain "palemoon.org")
+set(varSubDomain "dev.addons")
+set(varNginxDefines
     ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
-    -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
     -DNGX_OVERRIDE_SUBDOMAIN="testing"
+    -DNGX_ENABLE_SSL=1
+    -DNGX_SSL_CERT="addons.palemoon.org"
     -DNGX_ENABLE_PHP=1
     -DPHP_VERSION_70=1
 )
 
-# Proxy file for developer.palemoon.org
-set(varDomain "developer.palemoon.org")
+# Proxy file
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${FINAL_TARGET}/${varDomain}.proxy
-    ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
-    -DNGX_ENABLE_SSL=1
-    -DNGX_SSL_CERT="${varDomain}"
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
+    ${varNginxDefines}
 )
 
-# VHOST for developer.palemoon.org
-set(varSubdomain "developer")
-set(varRootDomain "palemoon.org")
-set(varDomain "${varSubdomain}.${varRootDomain}")
+# VHost file
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-    ${FINAL_TARGET}/${varDomain}.vhost
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
+    ${varNginxDefines}
+)
+
+# =============================================================================
+
+# ===| developer.palemoon.org |===================================================
+
+# Set Variables to be used as Preprocessor defines
+set(varRootDomain "palemoon.org")
+set(varSubDomain "developer")
+set(varNginxDefines
     ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
-    -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
+    -DNGX_ENABLE_SSL=1
+    -DNGX_SSL_CERT="${varSubDomain}.${varRootDomain}"
+    -DNGX_ENABLE_CLOUDFLARE=1
     -DNGX_ENABLE_PHP=1
-    -DPHP_VERSION_56=1
     -DNGX_ENABLE_PHP_404=1
     -DNGX_ENABLE_ENANO=1
+    -DPHP_VERSION_56=1
 )
+
+# Proxy file
+build_func_preprocess(
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
+    ${varNginxDefines}
+)
+
+# VHost file
+build_func_preprocess(
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
+    ${varNginxDefines}
+)
+
+# =============================================================================
