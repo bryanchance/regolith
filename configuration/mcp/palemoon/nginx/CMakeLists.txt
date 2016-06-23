@@ -40,9 +40,10 @@ build_func_preprocess(
     -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
     -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_INCLUDE="${mk_srcdir}/${varDomain}.vhost.inc"
+    -DNGX_ENABLE_CMSMS=1
     -DNGX_ENABLE_PHP=1
     -DPHP_VERSION_56=1
-    -DNGX_INCLUDE="${mk_srcdir}/${varDomain}.vhost.inc"
 )
 
 # Proxy file for dev.addons.palemoon.org
