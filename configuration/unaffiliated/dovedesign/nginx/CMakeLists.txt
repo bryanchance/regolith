@@ -1,41 +1,55 @@
+# ===| Macros |================================================================
+
 build_macro_mkPaths()
 SETUP_FINAL_TARGET()
 AURA_DEFINES()
 
+# =============================================================================
 
-# Userscope Nginx systemd Service
+# ===| User Nginx Instance SystemD Unit |======================================
+
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.service.in
     ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-nginx.service
     ${varAuraDefines}
 )
 
-# Userscope Nginx Server Instance
+# =============================================================================
+
+# ===| User Nginx Server Configuration |=======================================
+
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
     ${FINAL_TARGET}/nginx.conf
     ${varAuraDefines}
 )
 
-# Proxy file for susantobinart.com
-set(varDomain "susantobinart.com")
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${FINAL_TARGET}/www.${varDomain}.proxy
+# =============================================================================
+
+# ===| www.susantobin.com |====================================================
+
+# Set Variables to be used as Preprocessor defines
+set(varRootDomain "susantobinart.com")
+set(varSubDomain "www")
+set(varNginxDefines
     ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
+    -DNGX_ROOTDOMAIN="${varRootDomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
     -DNGX_MAINDOMAIN=1
 )
 
-# VHOST for susantobinart.com
-set(varSubdomain "www")
-set(varRootDomain "susantobinart.com")
-set(varDomain ${varRootDomain})
+# Proxy file
+build_func_preprocess(
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
+    ${varNginxDefines}
+)
+
+# VHost file
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-    ${FINAL_TARGET}/www.${varDomain}.vhost
-    ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
-    -DNGX_ROOTDOMAIN="${varRootDomain}"
-    -DNGX_SUBDOMAIN="${varSubdomain}"
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
+    ${varNginxDefines}
 )
+
+# =============================================================================

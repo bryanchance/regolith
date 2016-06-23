@@ -1,76 +1,91 @@
+# ===| Macros |================================================================
+
 build_macro_mkPaths()
 SETUP_FINAL_TARGET()
 AURA_DEFINES()
 
+# =============================================================================
 
-# Userscope Nginx systemd Service
+# ===| User Nginx Instance SystemD Unit |======================================
+
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.service.in
     ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-nginx.service
     ${varAuraDefines}
 )
 
-# Userscope Nginx Server Instance
+# =============================================================================
+
+# ===| User Nginx Server Configuration |=======================================
+
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
     ${FINAL_TARGET}/nginx.conf
     ${varAuraDefines}
 )
 
-if(varTargetServerQuartz)
-# Proxy file for binocnetwork.com
-    set(varDomain "binocnetwork.com")
-    build_func_preprocess(
-        ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-        ${FINAL_TARGET}/www.${varDomain}.proxy
-        ${varAuraDefines}
-        -DNGX_DOMAIN="${varDomain}"
-        -DNGX_MAINDOMAIN=1
-    )
+# =============================================================================
 
-    # VHOST for binocnetwork.com
-    set(varSubdomain "www")
-    set(varRootDomain "binocnetwork.com")
-    set(varDomain ${varRootDomain})
-    build_func_preprocess(
-        ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-        ${FINAL_TARGET}/www.${varDomain}.vhost
-        ${varAuraDefines}
-        -DNGX_DOMAIN="${varDomain}"
-        -DNGX_ROOTDOMAIN="${varRootDomain}"
-        -DNGX_SUBDOMAIN="${varSubdomain}"
-    )
-endif()
+# ===| www.binocnetwork.com |==================================================
 
-# Proxy file for Sever Subdomain
-if(varTargetServerQuartz)
-    set(varDomain "quartz.server.binocnetwork.com")
-elseif(varTargetServerRegolith)
-    set(varDomain "regolith.server.binocnetwork.com")
-endif()
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${FINAL_TARGET}/${varDomain}.proxy
+# Set Variables to be used as Preprocessor defines
+set(varRootDomain "binocnetwork.com")
+set(varSubDomain "www")
+set(varNginxDefines
     ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
+    -DNGX_ROOTDOMAIN="${varRootDomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
+    -DNGX_MAINDOMAIN=1
+    -DNGX_ENABLE_PHP=1
+    -DPHP_VERSION_70=1
 )
 
-# VHOST for Sever Subdomain
-if(varTargetServerQuartz)
-    set(varSubdomain "quartz.server")
-elseif(varTargetServerRegolith)
-    set(varSubdomain "regolith.server")
-endif()
-set(varRootDomain "binocnetwork.com")
-set(varDomain "${varSubdomain}.${varRootDomain}")
+# Proxy file
+build_func_preprocess(
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
+    ${varNginxDefines}
+)
+
+# VHost file
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-    ${FINAL_TARGET}/${varDomain}.vhost
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
+    ${varNginxDefines}
+)
+
+# =============================================================================
+
+# ===| operations.binocnetwork.com |===========================================
+
+# Set Variables to be used as Preprocessor defines
+set(varRootDomain "binocnetwork.com")
+if(varTargetServerQuartz)
+    set(varSubDomain "quartz.server")
+elseif(varTargetServerRegolith)
+    set(varSubDomain "regolith.server")
+endif()
+set(varNginxDefines
     ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
-    -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
     -DNGX_OVERRIDE_SUBDOMAIN="operations"
     -DNGX_ENABLE_PHP=1
     -DPHP_VERSION_56=1
 )
+
+# Proxy file
+build_func_preprocess(
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
+    ${varNginxDefines}
+)
+
+# VHost file
+build_func_preprocess(
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
+    ${varNginxDefines}
+)
+
+# =============================================================================

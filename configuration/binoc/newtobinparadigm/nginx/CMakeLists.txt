@@ -1,67 +1,87 @@
+# ===| Macros |================================================================
+
 build_macro_mkPaths()
 SETUP_FINAL_TARGET()
 AURA_DEFINES()
 
-# Userscope Nginx systemd Service
+# =============================================================================
+
+# ===| User Nginx Instance SystemD Unit |======================================
+
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.service.in
     ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-nginx.service
     ${varAuraDefines}
 )
 
-# Userscope Nginx Server Instance
+# =============================================================================
+
+# ===| User Nginx Server Configuration |=======================================
+
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
     ${FINAL_TARGET}/nginx.conf
     ${varAuraDefines}
 )
 
-# Proxy file for mattatobin.com
-set(varDomain "mattatobin.com")
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${FINAL_TARGET}/www.${varDomain}.proxy
-    ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
-    -DNGX_MAINDOMAIN=1
-)
+# =============================================================================
 
-# VHOST for mattatobin.com
-set(varSubdomain "www")
+# ===| www.mattatobin.com |====================================================
+
+# Set Variables to be used as Preprocessor defines
 set(varRootDomain "mattatobin.com")
-set(varDomain ${varRootDomain})
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-    ${FINAL_TARGET}/www.${varDomain}.vhost
+set(varSubDomain "www")
+set(varNginxDefines
     ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
-    -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
+    -DNGX_MAINDOMAIN=1
     -DNGX_ENABLE_PHP=1
     -DNGX_ENABLE_CMSMS=1
     -DPHP_VERSION_56=1
 )
 
-# Proxy file for personal.mattatobin.com
-set(varDomain "personal.mattatobin.com")
+# Proxy file
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
-    ${FINAL_TARGET}/${varDomain}.proxy
-    ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
+    ${varNginxDefines}
 )
 
-# VHOST for personal.mattatobin.com
-set(varSubdomain "personal")
-set(varRootDomain "mattatobin.com")
-set(varDomain "${varSubdomain}.${varRootDomain}")
+# VHost file
 build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-    ${FINAL_TARGET}/${varDomain}.vhost
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
+    ${varNginxDefines}
+)
+
+# =============================================================================
+
+# ===| personal.mattatobin.com |===============================================
+
+# Set Variables to be used as Preprocessor defines
+set(varRootDomain "mattatobin.com")
+set(varSubDomain "personal")
+set(varNginxDefines
     ${varAuraDefines}
-    -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
-    -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
     -DNGX_ENABLE_PHP=1
     -DPHP_VERSION_56=1
 )
+
+# Proxy file
+build_func_preprocess(
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
+    ${varNginxDefines}
+)
+
+# VHost file
+build_func_preprocess(
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
+    ${varNginxDefines}
+)
+
+# =============================================================================

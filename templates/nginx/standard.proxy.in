@@ -11,11 +11,11 @@
         ssl_ciphers !aNULL:!LOW:!MD5:!EXP:CAMELLIA:AES256:HIGH:AES128:!RC4:!3DES:!SEED;
         ssl_prefer_server_ciphers on;
 #endif
-        server_name www.@NGX_DOMAIN@;
+        server_name @NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@;
         add_header X-BinOC configured=true always;
         add_header X-BinOC platform=aura always;
         add_header X-BinOC level=@AURA_VERSION@ always;
-        return 302 $scheme://@NGX_DOMAIN@$request_uri;
+        return 302 $scheme://@NGX_ROOTDOMAIN@$request_uri;
     }
 #endif
     server {
@@ -30,7 +30,11 @@
         ssl_ciphers !aNULL:!LOW:!MD5:!EXP:CAMELLIA:AES256:HIGH:AES128:!RC4:!3DES:!SEED;
         ssl_prefer_server_ciphers on;
 #endif
-        server_name @NGX_DOMAIN@;
+#ifdef NGX_MAINDOMAIN
+        server_name @NGX_ROOTDOMAIN@;
+#else
+        server_name @NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@;
+#endif
 
         location / {
             proxy_pass http://unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
