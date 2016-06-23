@@ -37,5 +37,5 @@ php_admin_value[memory_limit] = 128M
 
 ; Set session path to a directory owned by process user
 php_value[session.save_handler] = files
-php_value[session.save_path] = /aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/php/session
+php_value[session.save_path] = /aura/secure/sessions/php/@AURA_USER_NAME@
 
