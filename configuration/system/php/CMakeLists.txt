@@ -11,17 +11,17 @@ COPY_TO_DIST("${SOURCE_FILES}")
 
 
 # System PHP systemd Service
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php.service.in
-    ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-php.service
-    ${varAuraDefines}
-)
+#build_func_preprocess(
+#    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php.service.in
+#    ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-php.service
+#    ${varAuraDefines}
+#)
 
-build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php.conf.in
-    ${FINAL_TARGET}/php.conf
-    ${varAuraDefines}
-)
+#build_func_preprocess(
+#    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php.conf.in
+#    ${FINAL_TARGET}/php.conf
+#    ${varAuraDefines}
+#)
 
 # PHP56 systemd Service
 build_func_preprocess(
