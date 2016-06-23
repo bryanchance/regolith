@@ -32,12 +32,16 @@ set(varSubdomain "www")
 set(varRootDomain "binaryoutcast.com")
 set(varDomain ${varRootDomain})
 build_func_preprocess(
-    www.${varDomain}.vhost.in
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
     ${FINAL_TARGET}/www.${varDomain}.vhost
     ${varAuraDefines}
     -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
     -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_INCLUDE="${mk_srcdir}/www.${varDomain}.vhost.inc"
+    -DNGX_ENABLE_CMSMS=1
+    -DNGX_ENABLE_PHP=1
+    -DPHP_VERSION_56=1
 )
 
 # Proxy file for techcentral.binaryoutcast.com
@@ -54,12 +58,15 @@ set(varSubdomain "techcentral")
 set(varRootDomain "binaryoutcast.com")
 set(varDomain "${varSubdomain}.${varRootDomain}")
 build_func_preprocess(
-    ${varDomain}.vhost.in
+    ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
     ${FINAL_TARGET}/${varDomain}.vhost
     ${varAuraDefines}
     -DNGX_DOMAIN="${varDomain}"
     -DNGX_ROOTDOMAIN="${varRootDomain}"
     -DNGX_SUBDOMAIN="${varSubdomain}"
+    -DNGX_ENABLE_PHP=1
+    -DNGX_ENABLE_WORDPRESS=1
+    -DPHP_VERSION_70=1
 )
 
 # Proxy file for repository.binaryoutcast.com
