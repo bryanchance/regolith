@@ -24,7 +24,7 @@ $TTL 3600
 ns2					IN	AAAA	@AURA_IPV6@
 quartz.server		IN	AAAA	@AURA_IPV6@
 regolith.server		IN	AAAA	2607:ff48:1:302::53cf:d149 ; Regolith IPv4
-ratty.hosted        IN	A		@AURA_IPV6@
+ratty.hosted        IN	AAAA    @AURA_IPV6@
 
 ; Sub-domain IPv4 Records
 ns1					IN	A		@AURA_IPV4@
