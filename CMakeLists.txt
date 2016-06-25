@@ -26,13 +26,14 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
 
     ### AURA_DEFINES
     macro(AURA_DEFINES)
-    set(varAuraDefines
-        -DAURA_VERSION="${varTargetAuraVersion}"
-        -DAURA_IPV4="${varSystemIPv4}"
-        -DAURA_IPV6="${varSystemIPv6}"
-        -DAURA_USER_CLASS="${varUserClass}"
-        -DAURA_USER_NAME="${varUserName}"
-    )
+        set(varAuraDefines
+            ${varBuildDefines}
+            -DAURA_VERSION="${varTargetAuraVersion}"
+            -DAURA_IPV4="${varSystemIPv4}"
+            -DAURA_IPV6="${varSystemIPv6}"
+            -DAURA_USER_CLASS="${varUserClass}"
+            -DAURA_USER_NAME="${varUserName}"
+        )
     endmacro(AURA_DEFINES)
     ### If the build script variable is not blank then evaluate it
     if (AURA_SERVER_TARGET)
