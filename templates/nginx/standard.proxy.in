@@ -15,6 +15,10 @@
         add_header X-BinOC configured=true always;
         add_header X-BinOC platform=aura always;
         add_header X-BinOC level=@AURA_VERSION@ always;
+        add_header X-BinOC build=@BUILD_EDATE@ always;
+#ifdef BUILD_PROJECT_SHA1
+        add_header X-BinOC sha1=@BUILD_PROJECT_SHA1@ always;
+#endif
         return 302 $scheme://@NGX_ROOTDOMAIN@$request_uri;
     }
 #endif
@@ -56,4 +60,8 @@
         add_header X-BinOC configured=true always;
         add_header X-BinOC platform=aura always;
         add_header X-BinOC level=@AURA_VERSION@ always;
+        add_header X-BinOC build=@BUILD_EDATE@ always;
+#ifdef BUILD_PROJECT_SHA1
+        add_header X-BinOC sha1=@BUILD_PROJECT_SHA1@ always;
+#endif
     }

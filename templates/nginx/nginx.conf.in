@@ -26,6 +26,11 @@ http {
         add_header X-BinOC configured=false always;
         add_header X-BinOC platform=aura always;
         add_header X-BinOC level=@AURA_VERSION@ always;
+        add_header X-BinOC build=@BUILD_EDATE@ always;
+#ifdef BUILD_PROJECT_SHA1
+        add_header X-BinOC sha1=@BUILD_PROJECT_SHA1@ always;
+#endif
+        
         return 406;
     }
 
