@@ -158,6 +158,8 @@ if(varTargetServerQuartz)
         -DNGX_ROOTDOMAIN="${varRootDomain}"
         -DNGX_SUBDOMAIN="${varSubDomain}"
         -DNGX_OVERRIDE_SUBDOMAIN="git"
+        -DNGX_ENABLE_PHP=1
+        -DPHP_VERSION_56=1
     )
 
     # Proxy file
