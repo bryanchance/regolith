@@ -7,8 +7,8 @@ add_subdirectory(binoc)
 
 ### These are specific to BinOC
 if(varTargetServerQuartz)
-	add_subdirectory(staff)
-	add_subdirectory(unaffiliated)
+    add_subdirectory(staff)
+    add_subdirectory(unaffiliated)
 elseif(varTargetServerRegolith)
-	add_subdirectory(mcp)
+    add_subdirectory(mcp)
 endif()

@@ -3,7 +3,7 @@ set(varUserClass "system")
 set(varUserName "root")
 
 if(varTargetServerQuartz)
-	add_subdirectory(bind)
+    add_subdirectory(bind)
 endif()
 add_subdirectory(etc)
 add_subdirectory(mysql)

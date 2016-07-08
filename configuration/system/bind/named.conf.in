@@ -8,53 +8,53 @@
 //
 
 /* Globals */
-	options {
-	// Listen
-		listen-on port 53 { 127.0.0.1; };
-		listen-on-v6 port 53 { ::1; };
-		listen-on port 53 { any; };
-		listen-on-v6 port 53 { any; };
-		
-	// Allow
-		allow-query     { localhost; };
-		
-	// Dirs
-		directory 	"/var/named";
-		dump-file 	"/var/named/data/cache_dump.db";
-		statistics-file "/var/named/data/named_stats.txt";
-		memstatistics-file "/var/named/data/named_mem_stats.txt";
-		
-	// Bools
-		recursion no;
-		additional-from-auth no;
-		additional-from-cache no;
-		auth-nxdomain yes;
-		dnssec-enable yes;
-		dnssec-validation yes;
-		dnssec-lookaside auto;
+    options {
+    // Listen
+        listen-on port 53 { 127.0.0.1; };
+        listen-on-v6 port 53 { ::1; };
+        listen-on port 53 { any; };
+        listen-on-v6 port 53 { any; };
+        
+    // Allow
+        allow-query     { localhost; };
+        
+    // Dirs
+        directory     "/var/named";
+        dump-file     "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        
+    // Bools
+        recursion no;
+        additional-from-auth no;
+        additional-from-cache no;
+        auth-nxdomain yes;
+        dnssec-enable yes;
+        dnssec-validation yes;
+        dnssec-lookaside auto;
 
-	/* Path to ISC DLV key */
-		bindkeys-file "/etc/named.iscdlv.key";
-		managed-keys-directory "/var/named/dynamic";
-	};
+    /* Path to ISC DLV key */
+        bindkeys-file "/etc/named.iscdlv.key";
+        managed-keys-directory "/var/named/dynamic";
+    };
 
 /* ============================================================== */
 
 /* Logs */
-	logging {
-		channel default_debug {
-			file "data/named.run";
-			severity dynamic;
-		};
-	};
+    logging {
+        channel default_debug {
+            file "data/named.run";
+            severity dynamic;
+        };
+    };
 
 /* ============================================================== */
 
 /* Root Zone */
-	zone "." IN {
-		type hint;
-		file "named.ca";
-	};
+    zone "." IN {
+        type hint;
+        file "named.ca";
+    };
 
 include "/etc/named.rfc1912.zones";
 include "/etc/named.root.key";
