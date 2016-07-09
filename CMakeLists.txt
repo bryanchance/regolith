@@ -33,6 +33,17 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
             -DAURA_IPV6="${varSystemIPv6}"
             -DAURA_USER_CLASS="${varUserClass}"
             -DAURA_USER_NAME="${varUserName}"
+            -DAURA_USER_ID="${varUserID}"
+            -DAURA_USER_PORT0="${varUserID}0"
+            -DAURA_USER_PORT1="${varUserID}1"
+            -DAURA_USER_PORT2="${varUserID}2"
+            -DAURA_USER_PORT3="${varUserID}3"
+            -DAURA_USER_PORT4="${varUserID}4"
+            -DAURA_USER_PORT5="${varUserID}5"
+            -DAURA_USER_PORT6="${varUserID}6"
+            -DAURA_USER_PORT7="${varUserID}7"
+            -DAURA_USER_PORT8="${varUserID}8"
+            -DAURA_USER_PORT9="${varUserID}9"
         )
     endmacro(AURA_DEFINES)
     ### If the build script variable is not blank then evaluate it

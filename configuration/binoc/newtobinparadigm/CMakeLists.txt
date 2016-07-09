@@ -1,5 +1,6 @@
 # Set information about this user
 set(varUserName "newtobinparadigm")
+set(varUserID "1250")
 
 # Add Subdirectories
 add_subdirectory(nginx)
