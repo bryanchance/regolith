@@ -129,20 +129,13 @@ if(varTargetServerQuartz)
         ${varAuraDefines}
         -DNGX_ROOTDOMAIN="${varRootDomain}"
         -DNGX_SUBDOMAIN="${varSubDomain}"
-        -DNGX_OVERRIDE_SUBDOMAIN="xr"
+        -DNGX_ENABLE_APACHE=1
     )
 
     # Proxy file
     build_func_preprocess(
         ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.proxy.in
         ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.proxy
-        ${varNginxDefines}
-    )
-
-    # VHost file
-    build_func_preprocess(
-        ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/standard.vhost.in
-        ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.vhost
         ${varNginxDefines}
     )
 endif()
