@@ -41,8 +41,11 @@
 #endif
 
         location / {
+#ifdef NGX_ENABLE_APACHE
+            proxy_pass http://127.0.0.1:@AURA_USER_PORT8@;
+#else
             proxy_pass http://unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
-
+#endif
             proxy_set_header Host $host;
             proxy_set_header HTTPS $https;
 
