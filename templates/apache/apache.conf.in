@@ -1,0 +1,67 @@
+# Apache httpd v2.4 minimal configuration
+ServerRoot "/etc/httpd"
+
+# Minimum modules needed
+LoadModule mpm_worker_module modules/mod_mpm_worker.so
+LoadModule mime_module modules/mod_mime.so
+LoadModule headers_module modules/mod_headers.so
+LoadModule mime_magic_module modules/mod_mime_magic.so
+LoadModule dir_module modules/mod_dir.so
+LoadModule authz_core_module modules/mod_authz_core.so
+LoadModule unixd_module modules/mod_unixd.so
+LoadModule include_module modules/mod_include.so
+LoadModule cgi_module modules/mod_cgi.so
+LoadModule alias_module modules/mod_alias.so
+
+user @AURA_USER_NAME@
+
+# MPM
+StartServers       1
+MaxClients        10
+MinSpareThreads    1
+MaxSpareThreads    4
+ThreadsPerChild     25
+MaxRequestsPerChild  0
+
+TypesConfig /etc/mime.types
+
+MIMEMagicFile conf/magic
+
+PidFile /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-apache.pid
+
+DefaultType text/plain
+
+AddHandler cgi-script .cgi
+
+# Port to Listen on
+Listen 127.0.0.1:12008
+
+# In a basic setup httpd can only serve files from its document root
+DocumentRoot "/aura/secure/sessions/apache/@AURA_USER_NAME@/public_html"
+
+# Default file to serve
+DirectoryIndex index.cgi index.html index.html.var
+
+# Errors go to their own log
+ErrorLog /var/log/apache/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-apache-error.log
+
+# Never change this block
+<Directory />
+    AllowOverride None
+    Require all denied
+</Directory>
+
+ScriptAlias /cgi-bin/ "/aura/secure/sessions/apache/@AURA_USER_NAME@/cgi-bin/"
+
+<Directory "/aura/secure/sessions/apache/@AURA_USER_NAME@/cgi-bin">
+    AllowOverride None
+    Options None
+    Require all granted
+</Directory>
+
+# Allow documents to be served from the DocumentRoot
+<Directory "/aura/secure/sessions/apache/@AURA_USER_NAME@/public_html">
+    Require all granted
+</Directory>
+
+Include /aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/apache/*.vhost
