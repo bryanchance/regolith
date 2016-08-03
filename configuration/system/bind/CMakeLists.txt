@@ -68,6 +68,14 @@ build_func_preprocess(
     -DBIND_DOMAIN="${varBindDomain}"
 )
 
+set(varBindDomain "hiddenpalace.zone")
+build_func_preprocess(
+    standard.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
+
 set(varBindDomain "royalgeekworld.com")
 build_func_preprocess(
     ${varBindDomain}.zone.in
@@ -105,4 +113,11 @@ build_func_preprocess(
     -DBIND_DOMAIN="${varBindDomain}"
 )
 
+set(varBindDomain "sage2012.org")
+build_func_preprocess(
+    standard.zone.in
+    ${FINAL_TARGET}/${varBindDomain}.zone
+    ${varBindDefines}
+    -DBIND_DOMAIN="${varBindDomain}"
+)
 # Preprocess zones for domains not on Quartz
