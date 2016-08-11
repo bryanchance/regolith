@@ -25,7 +25,7 @@
             return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/phoebus/services/api/addonsmanager.php?appID=%7B8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4%7D&scope=internal&request=$1&$args;
         }
         # Send 'external' Add-ons Manager requests to API
-        location ~* ^/integration/addon-manager/external/(recommended|search|themes) {
+        location ~* ^/integration/addon-manager/external/(recommended|searchplugins|themes|search) {
             return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/phoebus/services/api/addonsmanager.php?appID=%7B8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4%7D&scope=external&request=$1&$args;
         }
         
