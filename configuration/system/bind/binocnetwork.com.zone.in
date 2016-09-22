@@ -28,7 +28,6 @@ pastebin.service    IN  AAAA    @AURA_IPV6@
 git.service         IN  AAAA    @AURA_IPV6@
 xr.service          IN  AAAA    @AURA_IPV6@
 valik.staff         IN  AAAA    @AURA_IPV6@
-ratty.hosted        IN    AAAA    @AURA_IPV6@
 
 ; Sub-domain IPv4 Records
 ns1                    IN    A        @AURA_IPV4@
@@ -38,7 +37,6 @@ pastebin.service    IN  A       @AURA_IPV4@
 git.service         IN  A       @AURA_IPV4@
 xr.service          IN  A       @AURA_IPV4@
 valik.staff         IN  A       @AURA_IPV4@
-ratty.hosted        IN    A        @AURA_IPV4@
 
 ; Sub-domain CNAME Records
 www                    IN    CNAME    @BIND_DOMAIN@.
