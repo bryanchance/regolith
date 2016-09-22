@@ -103,7 +103,6 @@ set(varNginxDefines
     -DNGX_SUBDOMAIN="${varSubDomain}"
     -DNGX_ENABLE_SSL=1
     -DNGX_SSL_CERT="${varSubDomain}.${varRootDomain}"
-    -DNGX_ENABLE_CLOUDFLARE=1
     -DNGX_ENABLE_PHP=1
     -DNGX_ENABLE_PHP_404=1
     -DNGX_ENABLE_ENANO=1
