@@ -2,6 +2,11 @@
 set(varUserClass "unaffiliated")
 
 # Add subdirectories
-add_subdirectory(dovedesign)
-add_subdirectory(kokomosaferefuge)
-add_subdirectory(sagexpo)
+
+if(varTargetServerQuartz)
+    add_subdirectory(dovedesign)
+    add_subdirectory(kokomosaferefuge)
+    add_subdirectory(sagexpo)
+elseif(varTargetServerRegolith)
+    add_subdirectory(simplehosted)
+endif()
