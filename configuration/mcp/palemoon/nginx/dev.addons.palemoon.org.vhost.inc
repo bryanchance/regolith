@@ -1,28 +1,29 @@
+
         # Deal with Add-ons Manager Integration
         # Figure out if we are requesting something for the Add-ons Manager
 
         location ~* ^/integration/addon-manager/internal/discover {
-            return 302 /?component=discover;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=discover;
         }
 
         location ~* ^/integration/addon-manager/internal/update {
-            return 302 /?component=aus&$args;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=aus&$args;
         }
 
         # Send 'internal' Add-ons Manager requests to API
         location ~* ^/integration/addon-manager/internal/(get|recommended|search) {
-            return 302 /?component=integration&type=internal&request=$1&$args;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=internal&request=$1&$args;
         }
 
         # Send 'external' Add-ons Manager requests to API
         location ~* ^/integration/addon-manager/external/(recommended|searchplugins|themes|search|devtools) {
-            return 302 /?component=integration&type=external&request=$1&$args;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=external&request=$1&$args;
         }
         
         # Deal with permaxpi requests
         # This is used by the migration wizard
         location ~* /permaxpi/(.*) {
-            return 302 /?component=download&id=permaxpi-$1;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=download&id=permaxpi-$1;
         }
 
         # Directories virtual or otherwise should have a trailing slash
@@ -30,15 +31,15 @@
 
         # URL Changes
         location ~* /(firefox|resources)/incompatible/ {
-            return 302 /incompatible/;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/incompatible/;
         }
 
         location ~* ^/extensions/(alerts-and-updates|appearance|download-management|feeds-news-and-blogging|privacy-and-security|search-tools|social-and-communication|web-development|other)/(.*) {
-            return 302 /extensions/$2;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/$2;
         }
         
-        location ~* ^/themes/complete/(.*) {
-            return 302 /themes/$2;
+        location ~* ^/themes/complete(\/(.*)|\/) {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/themes/$2;
         }
         
         location /feed {
