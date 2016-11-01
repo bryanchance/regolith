@@ -72,7 +72,9 @@ set(varNginxDefines
     -DNGX_OVERRIDE_SUBDOMAIN="testing"
     -DNGX_ENABLE_SSL=1
     -DNGX_SSL_CERT="addons.palemoon.org"
+    -DNGX_INCLUDE="${mk_srcdir}/${varSubDomain}.${varRootDomain}.vhost.inc"
     -DNGX_ENABLE_PHP=1
+    -DNGX_ENABLE_PHOEBUS=1
     -DPHP_VERSION_70=1
 )
 

@@ -28,6 +28,8 @@
             try_files $uri $uri/ /index.php?page=$request_uri;
 #elif NGX_ENABLE_ENANO
             try_files $uri $uri/ @enano-rewrite;
+#elif NGX_ENABLE_PHOEBUS
+            try_files $uri $uri/ @phoebus-rewrite;
 #else
             try_files $uri/ $uri =404;
 #endif
@@ -35,7 +37,13 @@
 
 #ifdef NGX_ENABLE_ENANO
         location @enano-rewrite {
-            rewrite ^/(.*)$ /index.php?title=$1&$args;
+            rewrite ^/(.*)$ /index.php?title=$1&$args last;
+        }
+#endif
+
+#ifdef NGX_ENABLE_PHOEBUS
+        location @phoebus-rewrite {
+            rewrite ^ /index.php?component=site&path=$uri last;
         }
 #endif
 
