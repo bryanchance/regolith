@@ -19,7 +19,7 @@
         location ~* ^/integration/addon-manager/external/(recommended|searchplugins|themes|search|devtools) {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=external&request=$1&$args;
         }
-        
+
         # Deal with permaxpi requests
         # This is used by the migration wizard
         location ~* /permaxpi/(.*) {
@@ -33,19 +33,23 @@
         location ~* ^/(firefox|resources)/incompatible/ {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/incompatible/;
         }
-        
+
         location ~* ^/more/search-plugins/ {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/search-plugins/;
+        }
+
+        location ~* ^/extensions/(alerts-and-updates|appearance|download-management|feeds-news-and-blogging|privacy-and-security|search-tools|social-and-communication|web-development|other)/ {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/category/$1;
         }
 
         location ~* ^/extensions/(alerts-and-updates|appearance|download-management|feeds-news-and-blogging|privacy-and-security|search-tools|social-and-communication|web-development|other)/(.*) {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/$2;
         }
-        
+
         location ~* ^/themes/complete(\/(.*)|\/) {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/themes/$2;
         }
-        
+
         location /feed {
             return 302 http://forum.palemoon.org/feed.php?f=44&t=6144;
         }
@@ -55,7 +59,7 @@
         location ~*  \.(jpg|jpeg|png|gif|ico|css|js|xml|xpi)$ {
             expires -1;
         }
-        
+
         # Don't allow access to any file or folder starting with just a dot
         # Also, don't allow any execution of php from inside the datastore
         location ~* ^\/(\.|(phoebus|datastore)\/(.*)\.php$) {
