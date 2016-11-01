@@ -37,8 +37,12 @@
             return 302 /extensions/$2;
         }
         
+        location ~* ^/themes/complete/(.*) {
+            return 302 /themes/$2;
+        }
+        
         location /feed {
-            return 302 //forum.palemoon.org/feed.php?f=44&t=6144;
+            return 302 http://forum.palemoon.org/feed.php?f=44&t=6144;
         }
 
         # Some block I can't remember why I set.. Likely to avoid caching..
