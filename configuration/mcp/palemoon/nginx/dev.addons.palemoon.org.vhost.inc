@@ -30,6 +30,10 @@
         rewrite ^([^.]*[^/])$ $1/ redirect;
 
         # URL Changes
+        location ~* ^/phoebus/services/api/getsearchplugin.php {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=download&id=search-$arg_id;
+        }
+        
         location ~* ^/(firefox|resources)/incompatible/ {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/incompatible/;
         }
