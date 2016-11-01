@@ -35,7 +35,7 @@
         }
         
         location ~* ^/more/search-plugins/ {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/search-plugins/
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/search-plugins/;
         }
 
         location ~* ^/extensions/(alerts-and-updates|appearance|download-management|feeds-news-and-blogging|privacy-and-security|search-tools|social-and-communication|web-development|other)/(.*) {
