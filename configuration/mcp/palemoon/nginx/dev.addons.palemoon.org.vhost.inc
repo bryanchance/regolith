@@ -22,23 +22,20 @@
 
         # Deal with permaxpi requests
         # This is used by the migration wizard
-        location ~* /permaxpi/(.*) {
+        location ~* ^/permaxpi/(.*) {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=download&id=permaxpi-$1;
         }
-
-        # Directories virtual or otherwise should have a trailing slash
-        rewrite ^([^.]*[^/])$ $1/ redirect;
 
         # URL Changes
         location ~* ^/phoebus/services/api/getsearchplugin.php {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=download&id=search-$arg_id;
         }
         
-        location ~* ^/(firefox|resources)/incompatible/ {
+        location ~* ^/(firefox|resources)/incompatible {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/incompatible/;
         }
 
-        location ~* ^/more/search-plugins/ {
+        location ~* ^/more/search-plugins {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/search-plugins/;
         }
 
@@ -54,10 +51,13 @@
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/themes/$2;
         }
 
-        location /feed {
+        location ~* ^/feed {
             return 302 http://forum.palemoon.org/feed.php?f=44&t=6144;
         }
 
+        # Directories virtual or otherwise should have a trailing slash
+        rewrite ^([^.]*[^/])$ $1/ redirect;
+        
         # Some block I can't remember why I set.. Likely to avoid caching..
         # Could be reduced to JUST XPI because XPI files pulled from cache have no sec info and tend to die
         location ~*  \.(jpg|jpeg|png|gif|ico|css|js|xml|xpi)$ {
