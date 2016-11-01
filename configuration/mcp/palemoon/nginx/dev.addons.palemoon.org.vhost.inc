@@ -20,12 +20,6 @@
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=external&request=$1&$args;
         }
 
-        # Deal with permaxpi requests
-        # This is used by the migration wizard
-        location ~* ^/permaxpi/(.*) {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=download&id=permaxpi-$1;
-        }
-
         # URL Changes
         location ~* ^/phoebus/services/api/getsearchplugin.php {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=download&id=search-$arg_id;
