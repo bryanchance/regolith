@@ -40,8 +40,8 @@ set(varNginxDefines
     -DNGX_ENABLE_CLOUDFLARE=1
     -DNGX_INCLUDE="${mk_srcdir}/${varSubDomain}.${varRootDomain}.vhost.inc"
     -DNGX_ENABLE_PHP=1
-    -DNGX_ENABLE_CMSMS=1
-    -DPHP_VERSION_56=1
+    -DNGX_ENABLE_PHOEBUS=1
+    -DPHP_VERSION_70=1
 )
 
 # Proxy file

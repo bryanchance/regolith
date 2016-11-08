@@ -1,57 +1,65 @@
-        # Eval scheme manually because we have special cases but otherwise do NOT want content served from HTTP
-        # This terrible hack is mainly because of a CMSMS quirk and will be resolved fully with Phoebus
-        # $https_x_real_scheme is passed from the .proxy file
-        if ($http_x_real_scheme = "http") {
-            set $varRedirectToHTTPS "true";
-        }
-        
-        # Special case: Do NOT use https for discover page
-        if ($uri ~* "/integration/addon-manager/internal/discover") {
-            set $varRedirectToHTTPS "false";
-        }
-        
-        # If not on HTTPS then rewrite to HTTPS
-        if ($varRedirectToHTTPS = "true") {
-            rewrite  ^/(.*)$ https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/$1;
-        }
 
         # Deal with Add-ons Manager Integration
         # Figure out if we are requesting something for the Add-ons Manager
-        location ~* /integration/addon-manager/internal/update {
-            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/phoebus/services/aus/check.php?$args;
+
+        location ~* ^/integration/addon-manager/internal/discover {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=discover;
         }
+
+        location ~* ^/integration/addon-manager/internal/update {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=aus&$args;
+        }
+
         # Send 'internal' Add-ons Manager requests to API
         location ~* ^/integration/addon-manager/internal/(get|recommended|search) {
-            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/phoebus/services/api/addonsmanager.php?appID=%7B8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4%7D&scope=internal&request=$1&$args;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=internal&request=$1&$args;
         }
+
         # Send 'external' Add-ons Manager requests to API
-        location ~* ^/integration/addon-manager/external/(recommended|searchplugins|themes|search) {
-            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/phoebus/services/api/addonsmanager.php?appID=%7B8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4%7D&scope=external&request=$1&$args;
-        }
-        
-        # Deal with permaxpi requests
-        # This is used by the migration wizard (Also later by the AUS script and the main site)
-        location ~* /permaxpi/(.*) {
-            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/phoebus/services/api/getxpi.php?scope=permaxpi&id=$1;
+        location ~* ^/integration/addon-manager/external/(recommended|searchplugins|themes|search|devtools) {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=external&request=$1&$args;
         }
 
         # URL Changes
-        location /firefox/incompatible/ {
-            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/resources/incompatible/;
+        location ~* ^/phoebus/services/api/getsearchplugin.php {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=download&id=search-$arg_id;
         }
         
-        location /feed {
+        location ~* ^/(firefox|resources)/incompatible {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/incompatible/;
+        }
+
+        location ~* ^/more/search-plugins {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/search-plugins/;
+        }
+
+        location ~* ^/extensions/(alerts-and-updates|appearance|download-management|feeds-news-and-blogging|privacy-and-security|search-tools|social-and-communication|web-development|other)/$ {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/category/$1;
+        }
+
+        location ~* ^/extensions/(alerts-and-updates|appearance|download-management|feeds-news-and-blogging|privacy-and-security|search-tools|social-and-communication|web-development|other)/(.*) {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/$2;
+        }
+
+        location ~* ^/themes/complete(\/(.*)|\/) {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/themes/$2;
+        }
+
+        location ~* ^/feed {
             return 302 http://forum.palemoon.org/feed.php?f=44&t=6144;
         }
 
+        # Directories virtual or otherwise should have a trailing slash
+        rewrite ^([^.]*[^/])$ $1/ redirect;
+        
         # Some block I can't remember why I set.. Likely to avoid caching..
         # Could be reduced to JUST XPI because XPI files pulled from cache have no sec info and tend to die
         location ~*  \.(jpg|jpeg|png|gif|ico|css|js|xml|xpi)$ {
             expires -1;
         }
-        
+
         # Don't allow access to any file or folder starting with just a dot
         # Also, don't allow any execution of php from inside the datastore
-        location ~* ^/(\.|phoebus\/datastore/(.*)\.php$) {
+        location ~* ^\/(\.|(phoebus|datastore)\/(.*)\.php$) {
             log_not_found off; return 404;
         }
