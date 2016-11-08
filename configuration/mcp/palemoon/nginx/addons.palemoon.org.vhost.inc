@@ -3,21 +3,21 @@
         # Figure out if we are requesting something for the Add-ons Manager
 
         location ~* ^/integration/addon-manager/internal/discover {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=discover;
+            return 302 http://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=discover;
         }
 
         location ~* ^/integration/addon-manager/internal/update {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=aus&$args;
+            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=aus&$args;
         }
 
         # Send 'internal' Add-ons Manager requests to API
         location ~* ^/integration/addon-manager/internal/(get|recommended|search) {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=internal&request=$1&$args;
+            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=internal&request=$1&$args;
         }
 
         # Send 'external' Add-ons Manager requests to API
         location ~* ^/integration/addon-manager/external/(recommended|searchplugins|themes|search|devtools) {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=external&request=$1&$args;
+            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=external&request=$1&$args;
         }
 
         # URL Changes
