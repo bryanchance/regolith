@@ -44,6 +44,10 @@
         location ~* ^/themes/complete(\/(.*)|\/) {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/themes/$2;
         }
+        
+        location ~* ^/phoebus/datastore/pm-admin/(.*) {
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/datastore/$1;
+        }
 
         location ~* ^/feed {
             return 302 http://forum.palemoon.org/feed.php?f=44&t=6144;
