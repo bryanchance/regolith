@@ -46,7 +46,7 @@
         }
         
         location ~* ^/phoebus/datastore/pm-admin/(.*) {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/datastore/$1;
+            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/datastore/pm-admin/$1;
         }
 
         location ~* ^/feed {
