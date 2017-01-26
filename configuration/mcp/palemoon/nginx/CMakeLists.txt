@@ -22,6 +22,7 @@ build_func_preprocess(
     ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
     ${FINAL_TARGET}/nginx.conf
     ${varAuraDefines}
+    -DNGX_HIGH_WORKERS=1
 )
 
 # =============================================================================

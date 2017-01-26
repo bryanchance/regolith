@@ -1,5 +1,14 @@
 user @AURA_USER_NAME@;
+#ifdef NGX_HIGH_WORKERS
+#ifdef NGX_GLOBAL
+worker_processes 10;
+#else
+worker_processes 5;
+#endif
+#else
 worker_processes 2;
+#endif
+
 error_log /var/log/nginx/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-error.log error;
 pid /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.pid;
 
