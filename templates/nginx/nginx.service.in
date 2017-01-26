@@ -10,7 +10,7 @@ PIDFile=/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.pid
 ExecStartPre=/usr/sbin/nginx -t -c /aura/configuration/@AURA_USER_CLASS@/nginx/nginx.conf
 ExecStart=/usr/sbin/nginx -c /aura/configuration/@AURA_USER_CLASS@/nginx/nginx.conf
 #else
-ExecStartPre=/usr/sbin/nginx -t -c /aura/configuration/@AURA_USER_CLASS@/nginx/nginx.conf
+ExecStartPre=/usr/sbin/nginx -t -c /aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/nginx/nginx.conf
 ExecStart=/usr/sbin/nginx -c /aura/configuration/@AURA_USER_CLASS@/@AURA_USER_NAME@/nginx/nginx.conf
 #endif
 ExecReload=/bin/kill -s HUP $MAINPID
