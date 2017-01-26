@@ -1,7 +1,7 @@
 if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
     build_macro_mkPaths()
 
-    set(varTargetAuraVersion "4.0b5")
+    set(varTargetAuraVersion "4.0b6")
 
     # Figure out FINAL_TARGET in a ridiculous way
     macro(SETUP_FINAL_TARGET)
