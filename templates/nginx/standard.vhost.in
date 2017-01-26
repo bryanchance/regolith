@@ -1,5 +1,5 @@
     server {
-        listen unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-nginx.socket;
+        listen 127.0.0.1:@AURA_USER_PORT8@;
 #ifdef NGX_MAINDOMAIN
         server_name @NGX_ROOTDOMAIN@;
 #else
@@ -52,6 +52,7 @@
             include /aura/configuration/system/nginx/standard-php.inc;
 #ifndef NGX_ENABLE_PHP_404
             fastcgi_intercept_errors on;
+            fastcgi_buffering off;
             error_page 404 = @404;
 #endif
 #ifdef PHP_VERSION_56

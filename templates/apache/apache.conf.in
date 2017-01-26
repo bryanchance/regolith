@@ -34,7 +34,7 @@ DefaultType text/plain
 AddHandler cgi-script .cgi
 
 # Port to Listen on
-Listen 127.0.0.1:12008
+Listen 127.0.0.1:@AURA_USER_PORT7@
 
 # In a basic setup httpd can only serve files from its document root
 DocumentRoot "/aura/secure/sessions/apache/@AURA_USER_NAME@/public_html"
