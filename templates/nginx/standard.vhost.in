@@ -17,7 +17,6 @@
         autoindex off;
 #endif
         access_log off;
-        port_in_redirect off;
 
 #ifdef NGX_INCLUDE
 #include @NGX_INCLUDE@
