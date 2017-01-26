@@ -26,9 +26,6 @@ http {
         '"$http_user_agent" "$http_x_forwarded_for"';
     client_max_body_size 100m;
     proxy_buffering off;
-    proxy_buffer_size 4m;
-    fastcgi_buffering off;
-    fastcgi_buffer_size 4m;
     include /aura/configuration/system/nginx/mime-types.inc;
 #ifdef NGX_GLOBAL
     server {
