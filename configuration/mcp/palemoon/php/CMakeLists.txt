@@ -18,4 +18,5 @@ build_func_preprocess(
     ${FINAL_TARGET}/php70-pool.conf
     ${varAuraDefines}
     -DPHP_VERSION_70=1
+    -DPHP_ENABLE_LARGE_POOL=1
 )
