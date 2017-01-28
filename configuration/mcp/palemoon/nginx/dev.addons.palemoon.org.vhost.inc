@@ -69,3 +69,7 @@
         location ~* ^\/(\.|(phoebus|datastore)\/(.*)\.php$) {
             log_not_found off; return 404;
         }
+
+        location ~* ^\/datastore/(.*)\.xpi$ {
+            internal;
+        }
