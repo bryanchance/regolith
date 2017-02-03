@@ -24,6 +24,7 @@
 #endif        
 
         location @404 { return 404; }
+        location @501 { return 501; }
         location / {
 #if defined(NGX_ENABLE_CMSMS) || defined(NGX_ENABLE_WORDPRESS)
             try_files $uri $uri/ /index.php?page=$request_uri;
@@ -54,6 +55,7 @@
 #ifndef NGX_ENABLE_PHP_404
             fastcgi_intercept_errors on;
             error_page 404 = @404;
+            error_page 501 = @501;
 #endif
 #ifdef PHP_VERSION_56
             fastcgi_pass unix:/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php56.socket;
