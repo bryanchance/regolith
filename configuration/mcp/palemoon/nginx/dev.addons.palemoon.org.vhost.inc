@@ -66,7 +66,7 @@
 
         # Don't allow access to any file or folder starting with just a dot
         # Also, don't allow any execution of php from inside the datastore
-        location ~* ^\/(\.|(phoebus|datastore)\/(.*)\.php$) {
+        location ~* (\/(\.(.*)|(phoebus|datastore)\/(.*)\.(php|tpl|xhtml)$)) {
             log_not_found off; return 404;
         }
 
