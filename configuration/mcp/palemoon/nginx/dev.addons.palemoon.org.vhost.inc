@@ -22,11 +22,6 @@
             return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=external&request=$1&$args;
         }
 
-        # URL Changes
-        location ~* ^/phoebus/services/api/getsearchplugin.php {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=download&id=search-$arg_id;
-        }
-        
         location ~* ^/(firefox|resources)/incompatible {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/incompatible/;
         }
@@ -59,10 +54,6 @@
 
         location ~* ^/phoebus/datastore/pm-admin/(.*) {
             return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/datastore/pm-admin/$1;
-        }
-
-        location ~* ^/feed {
-            return 302 http://forum.palemoon.org/feed.php?f=44&t=6144;
         }
 
         # Directories virtual or otherwise should have a trailing slash
