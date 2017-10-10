@@ -1,5 +1,5 @@
 build_macro_mkPaths()
-SETUP_FINAL_TARGET()
+FIND_FINAL_TARGET()
 AURA_DEFINES()
 
 # Copy files wholesale
@@ -11,15 +11,24 @@ COPY_TO_DIST("${SOURCE_FILES}")
 
 # PHP70 systemd Service
 build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php.service.in
-    ${FINAL_TARGET}/aura-${varUserClass}-${varUserName}-php70.service
+    php.service.in
+    ${FINAL_TARGET}/${varUserName}-php70.service
     ${varAuraDefines}
     -DPHP_VERSION_70=1
 )
 
 build_func_preprocess(
-    ${mk_depth}/projects/${BUILD_PROJECT}/templates/php/php.conf.in
+    php.conf.in
     ${FINAL_TARGET}/php70.conf
     ${varAuraDefines}
     -DPHP_VERSION_70=1
+)
+
+# php-fpm pool config
+build_func_preprocess(
+    php-pool.conf.in
+    ${FINAL_TARGET}/php70-pool.conf
+    ${varAuraDefines}
+    -DPHP_VERSION_70=1
+    -DPHP_ENABLE_LARGE_POOL=1
 )

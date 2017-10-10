@@ -1,0 +1,19 @@
+[Unit]
+Description=Regolith Service: fcgid
+After=syslog.target network.target
+
+[Service]
+Type=notify
+#ifdef PHP_VERSION_70
+PIDFile=/var/run/@AURA_USER_NAME@-php70.pid
+ExecStart=/opt/remi/php70/root/usr/sbin/php-fpm --nodaemonize -c /regolith/config/php --fpm-config  /regolith/config/php/php70.conf
+#else
+PIDFile=/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.pid
+ExecStart=/usr/sbin/php-fpm --nodaemonize -c /aura/configuration/system/php --fpm-config  /aura/configuration/system/php/php.conf
+#endif
+ExecReload=/bin/kill -USR2 $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+

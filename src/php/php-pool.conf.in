@@ -1,0 +1,39 @@
+[@AURA_USER_NAME@]
+
+#ifdef PHP_VERSION_70
+listen = 127.0.0.1:@AURA_USER_PORT9@
+#else
+listen = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket
+#endif
+
+user = @AURA_USER_NAME@
+group = @AURA_USER_NAME@
+listen.mode = 0666
+
+pm = dynamic
+#ifdef PHP_ENABLE_LARGE_POOL
+pm.max_children = 10
+pm.start_servers = 2
+pm.min_spare_servers = 2
+pm.max_spare_servers = 5
+pm.max_requests = 200
+#else
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 2
+pm.max_spare_servers = 3
+pm.max_requests = 200
+#endif
+
+#ifdef PHP_ENABLE_SENDMAIL
+php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f www@my.domain.com
+#endif
+php_flag[display_errors] = on
+php_admin_value[error_log] = /var/log/php-fpm/@AURA_USER_NAME@-php.log
+php_admin_flag[log_errors] = off
+php_admin_value[memory_limit] = 128M
+
+; Set session path to a directory owned by process user
+php_value[session.save_handler] = files
+php_value[session.save_path] = /regolith/secure/sessions/php/@AURA_USER_NAME@
+
