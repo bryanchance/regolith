@@ -66,9 +66,7 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
       message( FATAL_ERROR "You did not specify a target server." )
     endif()
 
-
-
-    add_subdirectory(config)
+    add_subdirectory(src)
 
     build_func_package(${AURA_SERVER_TARGET}-${varTargetAuraVersion}.zip)
 else()
