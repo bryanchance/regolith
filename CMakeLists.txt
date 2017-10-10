@@ -31,7 +31,6 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
             -DAURA_VERSION="${varTargetAuraVersion}"
             -DAURA_IPV4="${varSystemIPv4}"
             -DAURA_IPV6="${varSystemIPv6}"
-            -DAURA_USER_CLASS="${varUserClass}"
             -DAURA_USER_NAME="${varUserName}"
             -DAURA_USER_ID="${varUserID}"
             -DAURA_USER_PORT0="${varUserID}0" # Reserved
@@ -51,6 +50,9 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
     if (AURA_SERVER_TARGET)
         if(AURA_SERVER_TARGET MATCHES "regolith")
             set(varTargetServerRegolith 1)
+            set(varSystemIPv4 "45.76.12.16")
+            set(varSystemIPv6 "2001:19f0:0:105::cba9")
+            set(varSystemServerName "regolith.palemoon.org")
         else()
         message( FATAL_ERROR "You did not specify a valid target server." )
         endif()
@@ -58,12 +60,7 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
       message( FATAL_ERROR "You did not specify a target server." )
     endif()
 
-    ### Server Specific Info
-    if(varTargetServerRegolith)
-        set(varSystemIPv4 "45.76.12.16")
-        set(varSystemIPv6 "2001:19f0:0:105::cba9")
-        set(varSystemServerName "regolith.palemoon.org")
-    endif()
+
 
     add_subdirectory(config)
 
