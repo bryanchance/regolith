@@ -1,3 +1,0 @@
-auth    required pam_userdb.so db=/aura/accounts/binoc/newtobinparadigm/.vsftpd/vsftpd 
-account required pam_userdb.so db=/aura/accounts/binoc/newtobinparadigm/.vsftpd/vsftpd
-session required pam_loginuid.so
