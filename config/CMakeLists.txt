@@ -2,6 +2,6 @@
 set(varUserName "regolith")
 set(varUserID "1100")
 
-add_subdirectory(nginx)
-add_subdirectory(php)
+#add_subdirectory(nginx)
+#add_subdirectory(php)
 add_subdirectory(vsftpd)

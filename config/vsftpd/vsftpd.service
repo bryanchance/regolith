@@ -1,0 +1,10 @@
+[Unit]
+Description=Regolith Service: vsftpd
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/vsftpd /regolith/config/vsftpd/vsftpd.conf
+
+[Install]
+WantedBy=multi-user.target
