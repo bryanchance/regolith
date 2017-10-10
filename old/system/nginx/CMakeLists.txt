@@ -18,15 +18,7 @@ build_func_preprocess(
     -DNGX_GLOBAL=1
 )
 
-    # Userscope Nginx Server Instance
-if(varTargetServerQuartz)
-    build_func_preprocess(
-        ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
-        ${FINAL_TARGET}/nginx.conf
-        ${varAuraDefines}
-        -DNGX_GLOBAL=1
-    )
-elseif(varTargetServerRegolith)
+# Userscope Nginx Server Instance
     build_func_preprocess(
         ${mk_depth}/projects/${BUILD_PROJECT}/templates/nginx/nginx.conf.in
         ${FINAL_TARGET}/nginx.conf
@@ -34,6 +26,5 @@ elseif(varTargetServerRegolith)
         -DNGX_GLOBAL=1
         -DNGX_HIGH_WORKERS=1
     )
-endif()
 
 add_subdirectory(certs)

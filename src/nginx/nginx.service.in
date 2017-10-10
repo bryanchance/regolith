@@ -1,0 +1,17 @@
+[Unit]
+Description=Regolith Service: nginx
+Documentation=http://nginx.org/en/docs/
+After=network.target remote-fs.target nss-lookup.target
+ 
+[Service]
+Type=forking
+PIDFile=/var/run/@AURA_USER_NAME@-nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -c /@AURA_USER_NAME@/config/nginx/nginx.conf
+ExecStart=/usr/sbin/nginx -c /@AURA_USER_NAME@/config/nginx/nginx.conf
+
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+ 
+[Install]
+WantedBy=multi-user.target
