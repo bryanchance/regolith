@@ -1,7 +1,7 @@
 if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
     build_macro_mkPaths()
 
-    set(varTargetAuraVersion "4.0b6")
+    set(varTargetAuraVersion "1.0.0a1")
 
     # Figure out FINAL_TARGET in a ridiculous way
     macro(SETUP_FINAL_TARGET)
@@ -21,7 +21,7 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
     
     ### If the build script has a blank variable that is passed as a define then target "Quartz" 
     if (NOT AURA_SERVER_TARGET)
-        set (AURA_SERVER_TARGET "quartz")
+        set (AURA_SERVER_TARGET "regolith")
     endif ()
 
     ### AURA_DEFINES
@@ -49,11 +49,7 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
 
     ### If the build script variable is not blank then evaluate it
     if (AURA_SERVER_TARGET)
-        if(AURA_SERVER_TARGET MATCHES "quartz")
-            set(varTargetServerQuartz 1)
-            set(varTargetServerRegolith)
-        elseif(AURA_SERVER_TARGET MATCHES "regolith")
-            set(varTargetServerQuartz)
+        if(AURA_SERVER_TARGET MATCHES "regolith")
             set(varTargetServerRegolith 1)
         else()
         message( FATAL_ERROR "You did not specify a valid target server." )
@@ -63,19 +59,15 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
     endif()
 
     ### Server Specific Info
-    if(varTargetServerQuartz)
-        set(varSystemIPv4 "45.63.2.9")
-        set(varSystemIPv6 "2001:19f0:200:2d91::7321:a697")
-        set(varSystemServerName "quartz.server.binocnetwork.com")
-    elseif(varTargetServerRegolith)
-        set(varSystemIPv4 "173.44.61.210")
-        set(varSystemIPv6 "2607:ff48:1:302::53cf:d149")
-        set(varSystemServerName "regolith.server.binocnetwork.com")
+    if(varTargetServerRegolith)
+        set(varSystemIPv4 "45.76.12.16")
+        set(varSystemIPv6 "2001:19f0:0:105::cba9")
+        set(varSystemServerName "regolith.palemoon.org")
     endif()
 
     add_subdirectory(configuration)
 
-    build_func_package(aura-configuration-${AURA_SERVER_TARGET}-${varTargetAuraVersion}.zip)
+    build_func_package(${AURA_SERVER_TARGET}-${varTargetAuraVersion}.zip)
 else()
     cmake_minimum_required (VERSION 2.8.11)
     project (aura-infra NONE)
