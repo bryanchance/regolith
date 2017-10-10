@@ -65,7 +65,7 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
         set(varSystemServerName "regolith.palemoon.org")
     endif()
 
-    add_subdirectory(configuration)
+    add_subdirectory(config)
 
     build_func_package(${AURA_SERVER_TARGET}-${varTargetAuraVersion}.zip)
 else()
