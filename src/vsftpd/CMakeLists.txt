@@ -1,5 +1,5 @@
 build_macro_mkPaths()
-SETUP_FINAL_TARGET()
+FIND_FINAL_TARGET()
 AURA_DEFINES()
 
 # Copy files wholesale

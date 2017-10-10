@@ -4,20 +4,26 @@ if((BINOC_BUILD) AND (NOT CMAKE_BINARY_DIR MATCHES CMAKE_SOURCE_DIR))
     set(varTargetAuraVersion "1.0.0a1")
 
     # Figure out FINAL_TARGET in a ridiculous way
-    macro(SETUP_FINAL_TARGET)
+    macro(FIND_FINAL_TARGET)
         string(REPLACE "${mk_topsrcdir}/projects/${BUILD_PROJECT}/" "" _PATH_DIFF ${mk_srcdir})
-
+        if(${_PATH_DIFF} MATCHES "src/(.*)")
+            string(REPLACE "src/" "" _PATH_DIFF ${_PATH_DIFF})
+        elseif(${_PATH_DIFF} MATCHES "src")
+            string(REPLACE "src" "" _PATH_DIFF ${_PATH_DIFF})
+        endif()
+        
         set(FINAL_TARGET ${_PATH_DIFF})
-        file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET})
-    endmacro(SETUP_FINAL_TARGET)
+    endmacro(FIND_FINAL_TARGET)
 
     function(COPY_TO_DIST _FILE_LIST)
         foreach(_FILE ${_FILE_LIST})
-            string(REPLACE "${mk_topsrcdir}/projects/${BUILD_PROJECT}/" "" _FILE_NAME ${_FILE})
+            string(REPLACE "${mk_topsrcdir}/projects/${BUILD_PROJECT}/src/" "" _FILE_NAME ${_FILE})
             message(STATUS "Copying: ${_FILE_NAME}")
             file(COPY ${_FILE} DESTINATION "${CMAKE_INSTALL_PREFIX}/${FINAL_TARGET}/")
         endforeach()
     endfunction(COPY_TO_DIST)
+
+    FIND_FINAL_TARGET()
     
     ### If the build script has a blank variable that is passed as a define then target "Quartz" 
     if (NOT AURA_SERVER_TARGET)
