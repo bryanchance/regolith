@@ -65,9 +65,13 @@
             expires -1;
         }
 
-        # Don't allow access to any file or folder starting with just a dot
-        # Also, don't allow any execution of php from inside the datastore
-        location ~* (\/(\.(.*)|(phoebus|datastore)\/(.*)\.(php|tpl|xhtml)$)) {
+        # Do not allow access to any file or folder starting with just a dot
+        location ~* (\/\.(.*)) {
+            log_not_found off; return 404;
+        }
+        
+        # Only allow access to specific file extensions from inside the datastore
+        location ~* (\/datastore\/(.*)\.(?!(xpi|png|xml|rdf)$)) {
             log_not_found off; return 404;
         }
 
