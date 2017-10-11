@@ -23,37 +23,37 @@
         }
 
         location ~* ^/(firefox|resources)/incompatible {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/incompatible/;
+            return 302 $scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/incompatible/;
         }
 
         location ~* ^/more/search-plugins {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/search-plugins/;
+            return 302 $scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/search-plugins/;
         }
 
         location ~* ^/extensions/category/all/$ {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/;
+            return 302 $scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/;
         }
 
         location ~* ^\/extensions\/category\/(.*)/$ {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/$1/;
+            return 302 $scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/extensions/$1/;
         }
 
         # See Phoebus 32b839c8844df8d1e8b546d12bc645349d16c668 for not catgeory redirect to /addon
 
         location ~* ^/themes/complete/$ {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/themes/;
+            return 302 $scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/themes/;
         }
 
         location ~* ^/(extensions|themes)/(.*)/(.*)/ {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/addon/$3/;
+            return 302 $scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/addon/$3/;
         }
 
         location ~* ^/themes/(.*)/$ {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/addon/$1/;
+            return 302 $scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/addon/$1/;
         }
 
         location ~* ^/phoebus/datastore/pm-admin/(.*) {
-            return 302 $http_x_real_scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/datastore/pm-admin/$1;
+            return 302 $scheme://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/datastore/pm-admin/$1;
         }
 
         # Directories virtual or otherwise should have a trailing slash
