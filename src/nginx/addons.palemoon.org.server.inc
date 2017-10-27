@@ -10,16 +10,16 @@
         # momenterary nginx status html instead of checking the final responce as 26 and older does.
         # This may be due to the security policy bs regarding orgin nonsense. Either way this solution works and is backwards compatible with 26 and older.
         # There may need to be additional location/return logic that needs to use old style rewrite to succeed. Thus far AUS is the only picky one.
-        rewrite ^/integration/addon-manager/internal/update https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=aus&$args redirect;
+        rewrite ^/integration/addon-manager/internal/update https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/services/?component=aus&$args redirect;
 
         # Send 'internal' Add-ons Manager requests to API
         location ~* ^/integration/addon-manager/internal/(get|recommended|search) {
-            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=internal&request=$1&$args;
+            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/services/?component=integration&type=internal&request=$1&$args;
         }
 
         # Send 'external' Add-ons Manager requests to API
         location ~* ^/integration/addon-manager/external/(recommended|searchplugins|themes|search|devtools) {
-            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/?component=integration&type=external&request=$1&$args;
+            return 302 https://@NGX_SUBDOMAIN@.@NGX_ROOTDOMAIN@/services/?component=integration&type=external&request=$1&$args;
         }
 
         location ~* ^/(firefox|resources)/incompatible {
