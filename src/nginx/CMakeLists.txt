@@ -87,3 +87,29 @@ build_func_preprocess(
 )
 
 # =============================================================================
+
+# ===| addons-dev.palemoon.org |===============================================
+
+# Set Variables to be used as Preprocessor defines
+set(varRootDomain "palemoon.org")
+set(varSubDomain "regolith")
+set(varNginxDefines
+    ${varAuraDefines}
+    -DNGX_ROOTDOMAIN="${varRootDomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
+    -DNGX_ENABLE_SSL=1
+    -DNGX_ENABLE_HTPASSWD=1
+    -DNGX_HTPASSWD_REALM="Regolith"
+    -DNGX_HTPASSWD_FILE="regolith-admin.htpasswd"
+    -DNGX_PROXY_ADDRESS="http://127.0.0.1:30015"
+    -DNGX_SSL_CERT="${varRootDomain}"
+)
+
+# VHost file
+build_func_preprocess(
+    standard.proxy.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.server
+    ${varNginxDefines}
+)
+
+# =============================================================================
