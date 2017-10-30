@@ -1,0 +1,10 @@
+[Unit]
+Description=Regolith Service: RethinkDB
+
+[Service]
+ExecStart=/usr/bin/rethinkdb serve --config-file /regolith/config/rethinkdb/regolith-phoebus.conf
+KillMode=process
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
