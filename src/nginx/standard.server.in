@@ -53,7 +53,10 @@
 #endif
         access_log off;
         absolute_redirect off;
-
+#ifdef NGX_ENABLE_HTPASSWD
+        auth_basic "@NGX_HTPASSWD_REALM@";
+        auth_basic_user_file /regolith/secure/htpasswd/@NGX_HTPASSWD_FILE@;
+#endif
 #ifdef NGX_INCLUDE
 #include @NGX_INCLUDE@
 #endif   
