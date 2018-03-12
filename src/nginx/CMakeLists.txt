@@ -88,7 +88,7 @@ build_func_preprocess(
 
 # =============================================================================
 
-# ===| addons-dev.palemoon.org |===============================================
+# ===| regolith.palemoon.org |===============================================
 
 # Set Variables to be used as Preprocessor defines
 set(varRootDomain "palemoon.org")
@@ -100,11 +100,9 @@ set(varNginxDefines
     -DNGX_SUBDOMAIN="${varSubDomain}"
     -DNGX_ENABLE_SSL=1
     -DNGX_SSL_CERT="${varRootDomain}"
+    -DNGX_INCLUDE="${mk_srcdir}/${varSubDomain}.${varRootDomain}.server.inc"
     -DNGX_ENABLE_PHP=1
     -DPHP_VERSION_70=1
-    -DNGX_ENABLE_HTPASSWD=1
-    -DNGX_HTPASSWD_REALM="Regolith"
-    -DNGX_HTPASSWD_FILE="regolith-admin.htpasswd"
 )
 
 # VHost file
