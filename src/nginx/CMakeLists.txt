@@ -88,7 +88,34 @@ build_func_preprocess(
 
 # =============================================================================
 
-# ===| addons.palemoon.org |===================================================
+# ===| addons.basilisk-browser.org |===================================================
+
+# Set Variables to be used as Preprocessor defines
+set(varRootDomain "basilisk-browser.org")
+set(varSubDomain "addons")
+set(varNginxDefines
+    ${varAuraDefines}
+    -DNGX_ROOTDOMAIN="${varRootDomain}"
+    -DNGX_SUBDOMAIN="${varSubDomain}"
+    -DNGX_ENABLE_SSL=1
+    -DNGX_SSL_CERT="regolith"
+    -DNGX_ENABLE_CLOUDFLARE=1
+    -DNGX_INCLUDE="${mk_srcdir}/${varSubDomain}.${varRootDomain}.server.inc"
+    -DNGX_ENABLE_PHP=1
+    -DNGX_ENABLE_PHOEBUS=1
+    -DPHP_VERSION_70=1
+)
+
+# Server file
+build_func_preprocess(
+    standard.server.in
+    ${FINAL_TARGET}/${varSubDomain}.${varRootDomain}.server
+    ${varNginxDefines}
+)
+
+# =============================================================================
+
+# ===| iw.addons.hyperbola.info |===================================================
 
 # Set Variables to be used as Preprocessor defines
 set(varRootDomain "hyperbola.info")
