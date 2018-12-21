@@ -36,7 +36,7 @@ build_func_preprocess(
 # PHP73 systemd Service
 build_func_preprocess(
     php.service.in
-    ${FINAL_TARGET}/${varUserName}-php72.service
+    ${FINAL_TARGET}/${varUserName}-php73.service
     ${varAuraDefines}
     -DPHP_VERSION_73=1
 )
