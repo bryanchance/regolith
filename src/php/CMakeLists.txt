@@ -32,3 +32,27 @@ build_func_preprocess(
     -DPHP_VERSION_70=1
     -DPHP_ENABLE_LARGE_POOL=1
 )
+
+# PHP72 systemd Service
+build_func_preprocess(
+    php.service.in
+    ${FINAL_TARGET}/${varUserName}-php72.service
+    ${varAuraDefines}
+    -DPHP_VERSION_72=1
+)
+
+build_func_preprocess(
+    php.conf.in
+    ${FINAL_TARGET}/php72.conf
+    ${varAuraDefines}
+    -DPHP_VERSION_72=1
+)
+
+# php-fpm pool config
+build_func_preprocess(
+    php-pool.conf.in
+    ${FINAL_TARGET}/php72-pool.conf
+    ${varAuraDefines}
+    -DPHP_VERSION_72=1
+    -DPHP_ENABLE_LARGE_POOL=1
+)

@@ -10,6 +10,8 @@
 ; file.
 #ifdef PHP_VERSION_70
 include=/regolith/config/php/php70-pool.conf
+#elif PHP_VERSION_72
+include=/regolith/config/php/php72-pool.conf
 #else
 include=/aura/configuration/*/*/php/php-pool.conf
 #endif
@@ -23,6 +25,8 @@ include=/aura/configuration/*/*/php/php-pool.conf
 ; Default Value: none
 #ifdef PHP_VERSION_70
 pid = /var/run/@AURA_USER_NAME@-php70.pid
+#elif PHP_VERSION_72
+pid = /var/run/@AURA_USER_NAME@-php72.pid
 #else
 pid = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.pid
 #endif
@@ -31,6 +35,8 @@ pid = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.pid
 ; Default Value: /var/log/php-fpm.log
 #ifdef PHP_VERSION_70
 error_log = /var/log/php-fpm/error70.log
+#elif PHP_VERSION_72
+error_log = /var/log/php-fpm/error72.log
 #else
 error_log = /var/log/php-fpm/error.log
 #endif
