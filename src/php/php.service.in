@@ -7,9 +7,9 @@ Type=notify
 #ifdef PHP_VERSION_70
 PIDFile=/var/run/@AURA_USER_NAME@-php70.pid
 ExecStart=/opt/remi/php70/root/usr/sbin/php-fpm --nodaemonize -c /regolith/config/php --fpm-config  /regolith/config/php/php70.conf
-#elif PHP_VERSION_72
-PIDFile=/var/run/@AURA_USER_NAME@-php72.pid
-ExecStart=/opt/remi/php72/root/usr/sbin/php-fpm --nodaemonize -c /regolith/config/php --fpm-config  /regolith/config/php/php72.conf
+#elif PHP_VERSION_73
+PIDFile=/var/run/@AURA_USER_NAME@-php73.pid
+ExecStart=/opt/remi/php73/root/usr/sbin/php-fpm --nodaemonize -c /regolith/config/php --fpm-config  /regolith/config/php/php73.conf
 #else
 PIDFile=/var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.pid
 ExecStart=/usr/sbin/php-fpm --nodaemonize -c /aura/configuration/system/php --fpm-config  /aura/configuration/system/php/php.conf

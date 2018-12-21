@@ -76,7 +76,7 @@ set(varNginxDefines
     -DNGX_INCLUDE="${mk_srcdir}/${varSubDomain}.${varRootDomain}.server.inc"
     -DNGX_ENABLE_PHP=1
     -DNGX_ENABLE_PHOEBUS=1
-    -DPHP_VERSION_72=1
+    -DPHP_VERSION_73=1
 )
 
 # VHost file

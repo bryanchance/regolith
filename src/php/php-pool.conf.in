@@ -2,7 +2,7 @@
 
 #ifdef PHP_VERSION_70
 listen = 127.0.0.1:@AURA_USER_PORT9@
-#elif PHP_VERSION_72
+#elif PHP_VERSION_73
 listen = 127.0.0.1:@AURA_USER_PORT7@
 #else
 listen = /var/run/aura-@AURA_USER_CLASS@-@AURA_USER_NAME@-php.socket
