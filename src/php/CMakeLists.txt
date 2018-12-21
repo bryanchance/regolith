@@ -43,7 +43,7 @@ build_func_preprocess(
 
 build_func_preprocess(
     php.conf.in
-    ${FINAL_TARGET}/php72.conf
+    ${FINAL_TARGET}/php73.conf
     ${varAuraDefines}
     -DPHP_VERSION_73=1
 )
@@ -51,7 +51,7 @@ build_func_preprocess(
 # php-fpm pool config
 build_func_preprocess(
     php-pool.conf.in
-    ${FINAL_TARGET}/php72-pool.conf
+    ${FINAL_TARGET}/php73-pool.conf
     ${varAuraDefines}
     -DPHP_VERSION_73=1
     -DPHP_ENABLE_LARGE_POOL=1
